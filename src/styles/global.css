@@ -7,6 +7,8 @@
   --parallax-scroll: 0px;
   --blueprint-edge-offset: max(1rem, 2vw);
   --blueprint-cross-half: 7px;
+  --blueprint-line-thickness: 2px;
+  --blueprint-cross-thickness: 2px;
 }
 
 html,
@@ -74,12 +76,12 @@ h6 {
 
 .blueprint-cross::before {
   width: 16px;
-  height: 1px;
+  height: var(--blueprint-cross-thickness);
   transform: translate(-50%, -50%);
 }
 
 .blueprint-cross::after {
-  width: 1px;
+  width: var(--blueprint-cross-thickness);
   height: 16px;
   transform: translate(-50%, -50%);
 }
@@ -93,9 +95,11 @@ h6 {
 }
 
 .blueprint-card {
-  --blueprint-card-line: rgba(188, 216, 233, 0.62);
+  --blueprint-card-line: rgba(188, 216, 233, 0.68);
   --blueprint-card-cross: rgba(188, 216, 233, 0.84);
   --blueprint-card-cross-size: 14px;
+  --blueprint-card-line-thickness: 2px;
+  --blueprint-card-cross-thickness: 2px;
   --blueprint-card-cross-half: calc(var(--blueprint-card-cross-size) / 2);
   --blueprint-card-line-break: 10px;
   --blueprint-card-edge-offset: calc(var(--blueprint-card-cross-half) + var(--blueprint-card-line-break));
@@ -129,7 +133,7 @@ h6 {
 .blueprint-card-line-bottom {
   left: var(--blueprint-card-edge-offset);
   right: var(--blueprint-card-edge-offset);
-  height: 1px;
+  height: var(--blueprint-card-line-thickness);
 }
 
 .blueprint-card-line-top {
@@ -144,7 +148,7 @@ h6 {
 .blueprint-card-line-right {
   top: var(--blueprint-card-edge-offset);
   bottom: var(--blueprint-card-edge-offset);
-  width: 1px;
+  width: var(--blueprint-card-line-thickness);
 }
 
 .blueprint-card-line-left {
@@ -186,11 +190,11 @@ h6 {
 
 .blueprint-card-cross::before {
   width: var(--blueprint-card-cross-size);
-  height: 1px;
+  height: var(--blueprint-card-cross-thickness);
 }
 
 .blueprint-card-cross::after {
-  width: 1px;
+  width: var(--blueprint-card-cross-thickness);
   height: var(--blueprint-card-cross-size);
 }
 
@@ -230,7 +234,7 @@ h6 {
   position: absolute;
   top: 22px;
   bottom: 44px;
-  width: 1px;
+  width: var(--blueprint-line-thickness);
   background: rgba(179, 210, 228, 0.45);
   opacity: 0.86;
 }
@@ -273,7 +277,7 @@ h6 {
   width: 100vw;
   height: 112px;
   transform: translateX(-50%);
-  border-top: 1px solid rgba(209, 228, 176, 0.11);
+  border-top: 2px solid rgba(209, 228, 176, 0.18);
   pointer-events: none;
   overflow: visible;
   z-index: 2;
@@ -303,12 +307,12 @@ h6 {
 
 .last-section-cross::before {
   width: 16px;
-  height: 1px;
+  height: var(--blueprint-cross-thickness);
   transform: translate(-50%, -50%);
 }
 
 .last-section-cross::after {
-  width: 1px;
+  width: var(--blueprint-cross-thickness);
   height: 16px;
   transform: translate(-50%, -50%);
 }
@@ -378,13 +382,13 @@ h6 {
 .blueprint-stroke {
   fill: none;
   stroke: rgba(196, 219, 233, 0.46);
-  stroke-width: 1.18;
+  stroke-width: 1.52;
   stroke-linecap: round;
   stroke-linejoin: round;
 }
 
 .blueprint-thin {
-  stroke-width: 0.84;
+  stroke-width: 1.14;
   opacity: 0.82;
 }
 
