@@ -2,15 +2,27 @@ import * as React from 'react';
 
 import { cn } from '@/lib/utils';
 
-const Card = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(({ className, ...props }, ref) => (
+const Card = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(({ className, children, ...props }, ref) => (
   <div
     ref={ref}
     className={cn(
-      'rounded-[20px] border border-[#c5dab738] bg-[linear-gradient(170deg,rgba(18,23,16,0.9),rgba(9,12,8,0.96))] p-5',
+      'blueprint-card relative overflow-visible rounded-none bg-[linear-gradient(180deg,rgba(10,15,12,0.95),rgba(5,8,6,0.98))] p-5',
       className
     )}
     {...props}
-  />
+  >
+    <span className="blueprint-card-frame" aria-hidden="true">
+      <span className="blueprint-card-line blueprint-card-line-top" />
+      <span className="blueprint-card-line blueprint-card-line-right" />
+      <span className="blueprint-card-line blueprint-card-line-bottom" />
+      <span className="blueprint-card-line blueprint-card-line-left" />
+      <span className="blueprint-card-cross blueprint-card-cross-tl" />
+      <span className="blueprint-card-cross blueprint-card-cross-tr" />
+      <span className="blueprint-card-cross blueprint-card-cross-br" />
+      <span className="blueprint-card-cross blueprint-card-cross-bl" />
+    </span>
+    {children}
+  </div>
 ));
 Card.displayName = 'Card';
 

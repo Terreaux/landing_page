@@ -357,7 +357,6 @@ export function LandingPage() {
           </section>
 
         <section id="services" className="relative scroll-mt-28 py-24 md:py-32">
-          <span className="section-blob" style={{ '--x': '80%', '--y': '22%', '--size': '32rem', '--hue': '150', '--alpha': '0.24', '--drift-x': '-132px', '--drift-y': '-48px', '--duration': '11.7s', '--delay': '-4.2s' } as CSSProperties} aria-hidden="true" />
           <div className="relative z-10 reveal mb-12 md:mb-14" data-reveal>
             <p className="eyebrow">Core Expertise</p>
             <h2 className="max-w-[21ch] font-display text-[clamp(1.6rem,4vw,3.25rem)] leading-[1.05]">
@@ -389,19 +388,19 @@ export function LandingPage() {
 
           <div className="relative z-10 grid gap-5 md:gap-6">
             {timelineItems.map((item) => (
-              <div key={item.step} className="reveal rounded-[18px] border border-[#adc9915a] bg-[#0b0e0ad9] px-5 py-4" data-reveal>
+              <Card key={item.step} className="reveal px-5 py-4" data-reveal>
                 <span className="font-display text-sm tracking-[0.15em] text-[#c3e8b1]">{item.step}</span>
                 <h3 className="mt-1 font-display text-[clamp(1.2rem,2vw,1.6rem)]">{item.title}</h3>
                 <p className="mt-2 text-[#c6d0b9]">{item.copy}</p>
-              </div>
+              </Card>
             ))}
           </div>
         </section>
 
         <section id="contact" className="relative scroll-mt-28 pt-24 pb-28 md:pt-32 md:pb-36">
           <span className="section-blob" style={{ '--x': '22%', '--y': '20%', '--size': '30rem', '--hue': '172', '--alpha': '0.22', '--drift-x': '90px', '--drift-y': '-54px', '--duration': '10.2s', '--delay': '-2.1s' } as CSSProperties} aria-hidden="true" />
-          <div
-            className="relative z-10 reveal grid gap-8 rounded-3xl border border-[#bcd69f59] bg-[linear-gradient(175deg,rgba(16,21,14,0.95),rgba(8,10,7,0.99))] p-[clamp(1.2rem,3vw,2.2rem)] md:grid-cols-[1.05fr_1fr] md:gap-10"
+          <Card
+            className="relative z-10 reveal grid gap-8 p-[clamp(1.2rem,3vw,2.2rem)] md:grid-cols-[1.05fr_1fr] md:gap-10"
             data-reveal
           >
             <div>
@@ -412,16 +411,11 @@ export function LandingPage() {
               <p className="mt-3 max-w-[56ch] text-[#d0d9c3]">
                 Share your objective, timeline, and constraints. We&apos;ll reply with a practical roadmap.
               </p>
-              <div className="mt-6">
-                <a className="text-sm text-[#c4ceba] underline-offset-4 hover:underline" href="/contact">
-                  Dedicated campaign page: /contact
-                </a>
-              </div>
             </div>
             <div>
               <ContactForm />
             </div>
-          </div>
+          </Card>
           <div className="last-section-tail" aria-hidden="true">
             <span className="last-section-cross last-section-cross-left" />
             <span className="last-section-cross last-section-cross-right" />

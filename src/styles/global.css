@@ -54,11 +54,13 @@ h6 {
 .blueprint-cross {
   position: absolute;
   bottom: -1px;
-  width: 14px;
-  height: 14px;
+  width: 16px;
+  height: 16px;
   transform: translateY(50%);
   opacity: 0.7;
   pointer-events: none;
+  background: #060706;
+  box-shadow: 0 0 0 8px #060706;
 }
 
 .blueprint-cross::before,
@@ -71,14 +73,14 @@ h6 {
 }
 
 .blueprint-cross::before {
-  width: 14px;
+  width: 16px;
   height: 1px;
   transform: translate(-50%, -50%);
 }
 
 .blueprint-cross::after {
   width: 1px;
-  height: 14px;
+  height: 16px;
   transform: translate(-50%, -50%);
 }
 
@@ -88,6 +90,128 @@ h6 {
 
 .blueprint-cross-right {
   right: var(--blueprint-edge-offset);
+}
+
+.blueprint-card {
+  --blueprint-card-line: rgba(188, 216, 233, 0.62);
+  --blueprint-card-cross: rgba(188, 216, 233, 0.84);
+  --blueprint-card-cross-size: 14px;
+  --blueprint-card-cross-half: calc(var(--blueprint-card-cross-size) / 2);
+  --blueprint-card-line-break: 10px;
+  --blueprint-card-edge-offset: calc(var(--blueprint-card-cross-half) + var(--blueprint-card-line-break));
+  --blueprint-card-grain: url("data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 width=%2764%27 height=%2764%27 viewBox=%270 0 64 64%27%3E%3Cfilter id=%27n%27%3E%3CfeTurbulence type=%27fractalNoise%27 baseFrequency=%271.15%27 numOctaves=%272%27 stitchTiles=%27stitch%27/%3E%3C/filter%3E%3Crect width=%2764%27 height=%2764%27 filter=%27url(%23n)%27 opacity=%270.55%27/%3E%3C/svg%3E");
+  border-radius: 0 !important;
+}
+
+.blueprint-card-frame {
+  position: absolute;
+  inset: 0;
+  border-radius: 0 !important;
+  pointer-events: none;
+}
+
+.blueprint-card-line {
+  position: absolute;
+  background-color: var(--blueprint-card-line);
+}
+
+.blueprint-card-line::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: var(--blueprint-card-grain);
+  background-size: 48px 48px;
+  background-repeat: repeat;
+  opacity: 0.5;
+}
+
+.blueprint-card-line-top,
+.blueprint-card-line-bottom {
+  left: var(--blueprint-card-edge-offset);
+  right: var(--blueprint-card-edge-offset);
+  height: 1px;
+}
+
+.blueprint-card-line-top {
+  top: 0;
+}
+
+.blueprint-card-line-bottom {
+  bottom: 0;
+}
+
+.blueprint-card-line-left,
+.blueprint-card-line-right {
+  top: var(--blueprint-card-edge-offset);
+  bottom: var(--blueprint-card-edge-offset);
+  width: 1px;
+}
+
+.blueprint-card-line-left {
+  left: 0;
+}
+
+.blueprint-card-line-right {
+  right: 0;
+}
+
+.blueprint-card-cross {
+  position: absolute;
+  width: var(--blueprint-card-cross-size);
+  height: var(--blueprint-card-cross-size);
+  transform: translate(-50%, -50%);
+}
+
+.blueprint-card-cross::before,
+.blueprint-card-cross::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  background-color: var(--blueprint-card-cross);
+  transform: translate(-50%, -50%);
+}
+
+.blueprint-card-cross::before {
+  background-image: var(--blueprint-card-grain);
+  background-size: 42px 42px;
+  background-repeat: repeat;
+}
+
+.blueprint-card-cross::after {
+  background-image: var(--blueprint-card-grain);
+  background-size: 42px 42px;
+  background-repeat: repeat;
+}
+
+.blueprint-card-cross::before {
+  width: var(--blueprint-card-cross-size);
+  height: 1px;
+}
+
+.blueprint-card-cross::after {
+  width: 1px;
+  height: var(--blueprint-card-cross-size);
+}
+
+.blueprint-card-cross-tl {
+  left: 0;
+  top: 0;
+}
+
+.blueprint-card-cross-tr {
+  left: 100%;
+  top: 0;
+}
+
+.blueprint-card-cross-br {
+  left: 100%;
+  top: 100%;
+}
+
+.blueprint-card-cross-bl {
+  left: 0;
+  top: 100%;
 }
 
 .page-blueprint-guides {
@@ -104,8 +228,8 @@ h6 {
 
 .blueprint-guide {
   position: absolute;
-  top: 12px;
-  bottom: 0;
+  top: 22px;
+  bottom: 44px;
   width: 1px;
   background: rgba(179, 210, 228, 0.45);
   opacity: 0.86;
@@ -158,12 +282,14 @@ h6 {
 .last-section-cross {
   position: absolute;
   top: -1px;
-  width: 14px;
-  height: 14px;
+  width: 16px;
+  height: 16px;
   transform: translate(-50%, -50%);
   opacity: 0.65;
   pointer-events: none;
   z-index: 4;
+  background: #060706;
+  box-shadow: 0 0 0 8px #060706;
 }
 
 .last-section-cross::before,
@@ -176,14 +302,14 @@ h6 {
 }
 
 .last-section-cross::before {
-  width: 14px;
+  width: 16px;
   height: 1px;
   transform: translate(-50%, -50%);
 }
 
 .last-section-cross::after {
   width: 1px;
-  height: 14px;
+  height: 16px;
   transform: translate(-50%, -50%);
 }
 
@@ -414,7 +540,8 @@ h6 {
   }
 
   .blueprint-guide {
-    top: 10px;
+    top: 18px;
+    bottom: 36px;
   }
 
   .section-blob {

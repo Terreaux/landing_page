@@ -92,11 +92,8 @@ export function ContactForm() {
 
       <div className="flex flex-wrap items-center gap-3 pt-2">
         <Button type="submit" disabled={isSubmitting}>
-          {isSubmitting ? 'Sending...' : 'Send Inquiry'}
+          {isSubmitting ? 'Sending...' : 'hello@terreaux.co'}
         </Button>
-        <a className="text-sm text-[#c4ceba] underline-offset-4 hover:underline" href="mailto:hello@terreaux.co">
-          or email hello@terreaux.co
-        </a>
       </div>
 
       {statusCopy ? <p className={`text-sm ${statusCopy.className}`}>{statusCopy.text}</p> : null}
