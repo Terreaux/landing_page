@@ -41,21 +41,6 @@ const timelineItems = [
   }
 ];
 
-const blobLayers = [
-  { x: '72%', y: '10%', size: '12.8rem', blur: '12px', opacity: 0.19, speed: -0.04, hue: 88, driftX: '0.8rem', driftY: '0.65rem', duration: '14s', delay: '-2.4s' },
-  { x: '30%', y: '17%', size: '9.4rem', blur: '10px', opacity: 0.16, speed: 0.06, hue: 110, driftX: '0.5rem', driftY: '0.8rem', duration: '17s', delay: '-5.1s' },
-  { x: '84%', y: '23%', size: '14.8rem', blur: '13px', opacity: 0.17, speed: -0.05, hue: 96, driftX: '0.95rem', driftY: '0.7rem', duration: '16s', delay: '-3.7s' },
-  { x: '12%', y: '31%', size: '11.2rem', blur: '11px', opacity: 0.19, speed: 0.04, hue: 114, driftX: '0.75rem', driftY: '0.55rem', duration: '15s', delay: '-6.2s' },
-  { x: '48%', y: '39%', size: '8.8rem', blur: '10px', opacity: 0.15, speed: -0.07, hue: 92, driftX: '0.6rem', driftY: '0.9rem', duration: '18s', delay: '-1.8s' },
-  { x: '76%', y: '46%', size: '13.6rem', blur: '12px', opacity: 0.17, speed: 0.05, hue: 101, driftX: '0.85rem', driftY: '0.7rem', duration: '15.5s', delay: '-7.4s' },
-  { x: '20%', y: '55%', size: '10.1rem', blur: '10px', opacity: 0.18, speed: -0.03, hue: 108, driftX: '0.55rem', driftY: '0.75rem', duration: '16.4s', delay: '-4.9s' },
-  { x: '60%', y: '63%', size: '15.2rem', blur: '13px', opacity: 0.16, speed: 0.04, hue: 94, driftX: '1rem', driftY: '0.85rem', duration: '19s', delay: '-8.4s' },
-  { x: '6%', y: '71%', size: '9.6rem', blur: '10px', opacity: 0.15, speed: -0.06, hue: 112, driftX: '0.65rem', driftY: '0.6rem', duration: '14.8s', delay: '-2.9s' },
-  { x: '82%', y: '79%', size: '12.4rem', blur: '11px', opacity: 0.17, speed: 0.05, hue: 99, driftX: '0.8rem', driftY: '0.95rem', duration: '17.6s', delay: '-6.8s' },
-  { x: '40%', y: '88%', size: '16.4rem', blur: '14px', opacity: 0.18, speed: -0.04, hue: 90, driftX: '1.1rem', driftY: '0.8rem', duration: '20s', delay: '-9.3s' },
-  { x: '56%', y: '93%', size: '11rem', blur: '11px', opacity: 0.15, speed: 0.03, hue: 106, driftX: '0.7rem', driftY: '0.65rem', duration: '15.9s', delay: '-3.5s' }
-];
-
 const manifoldLayers = [
   { x: '-8%', y: '7%', width: '120%', height: '20rem', speed: 0.03, rotate: '-4deg', opacity: 0.26 },
   { x: '-3%', y: '19%', width: '114%', height: '16rem', speed: -0.04, rotate: '3deg', opacity: 0.2 },
@@ -156,9 +141,53 @@ export function LandingPage() {
     });
 
     let rafId = 0;
+    let guideSyncRafId = 0;
+    let guideSyncUntil = 0;
+    let guidesVisible = false;
+
+    const syncBlueprintGuides = () => {
+      const guideLayer = document.querySelector<HTMLElement>('.page-blueprint-guides');
+      const leftCross = document.querySelector<HTMLElement>('.blueprint-cross-left');
+      const rightCross = document.querySelector<HTMLElement>('.blueprint-cross-right');
+      if (!guideLayer || !leftCross || !rightCross) return;
+
+      const layerRect = guideLayer.getBoundingClientRect();
+      const leftRect = leftCross.getBoundingClientRect();
+      const rightRect = rightCross.getBoundingClientRect();
+
+      document.documentElement.style.setProperty('--blueprint-guide-left-x', `${leftRect.left + leftRect.width / 2 - layerRect.left}px`);
+      document.documentElement.style.setProperty('--blueprint-guide-right-x', `${rightRect.left + rightRect.width / 2 - layerRect.left}px`);
+      if (!guidesVisible) {
+        document.documentElement.style.setProperty('--blueprint-guides-opacity', '1');
+        guidesVisible = true;
+      }
+    };
+
+    const syncGuidesAfterLayout = () => {
+      window.requestAnimationFrame(() => {
+        window.requestAnimationFrame(syncBlueprintGuides);
+      });
+    };
+
+    const runGuideSyncWindow = (durationMs = 1400) => {
+      guideSyncUntil = Math.max(guideSyncUntil, performance.now() + durationMs);
+      if (guideSyncRafId !== 0) return;
+
+      const tick = (now: number) => {
+        syncBlueprintGuides();
+        if (now < guideSyncUntil) {
+          guideSyncRafId = window.requestAnimationFrame(tick);
+          return;
+        }
+        guideSyncRafId = 0;
+      };
+
+      guideSyncRafId = window.requestAnimationFrame(tick);
+    };
 
     const updateParallax = () => {
       document.documentElement.style.setProperty('--parallax-scroll', `${window.scrollY}px`);
+      syncBlueprintGuides();
       rafId = 0;
     };
 
@@ -168,16 +197,38 @@ export function LandingPage() {
     };
 
     updateParallax();
+    syncGuidesAfterLayout();
+    runGuideSyncWindow();
     window.addEventListener('scroll', handleScroll, { passive: true });
     window.addEventListener('resize', handleScroll);
+    window.addEventListener('load', syncGuidesAfterLayout);
+    document.fonts?.ready.then(() => {
+      syncGuidesAfterLayout();
+      runGuideSyncWindow(900);
+    });
+
+    const headerEl = document.querySelector<HTMLElement>('header[data-reveal]');
+    const handleHeaderTransitionStart = () => runGuideSyncWindow(1200);
+    const handleHeaderTransitionEnd = () => syncGuidesAfterLayout();
+    headerEl?.addEventListener('transitionstart', handleHeaderTransitionStart);
+    headerEl?.addEventListener('transitionend', handleHeaderTransitionEnd);
 
     return () => {
       observer.disconnect();
       window.removeEventListener('scroll', handleScroll);
       window.removeEventListener('resize', handleScroll);
+      window.removeEventListener('load', syncGuidesAfterLayout);
+      headerEl?.removeEventListener('transitionstart', handleHeaderTransitionStart);
+      headerEl?.removeEventListener('transitionend', handleHeaderTransitionEnd);
       if (rafId !== 0) {
         window.cancelAnimationFrame(rafId);
       }
+      if (guideSyncRafId !== 0) {
+        window.cancelAnimationFrame(guideSyncRafId);
+      }
+      document.documentElement.style.removeProperty('--blueprint-guide-left-x');
+      document.documentElement.style.removeProperty('--blueprint-guide-right-x');
+      document.documentElement.style.removeProperty('--blueprint-guides-opacity');
     };
   }, []);
 
@@ -186,6 +237,8 @@ export function LandingPage() {
       <div className="site-bg" aria-hidden="true" />
 
       <header className="reveal sticky top-0 z-20 flex items-center justify-between gap-5 border-b border-[#d1e4b01c] bg-black/60 px-[5vw] py-5 backdrop-blur-md" data-reveal>
+        <span className="blueprint-cross blueprint-cross-left" aria-hidden="true" />
+        <span className="blueprint-cross blueprint-cross-right" aria-hidden="true" />
         <div className="font-display text-base font-extrabold tracking-[0.09em]">TERREAUX</div>
         <nav className="hidden font-monoSans text-[0.79rem] uppercase tracking-[0.14em] text-[#b6bfab] md:flex md:gap-7 lg:gap-10 xl:gap-12">
           <a href="#services" className="transition-colors hover:text-[#f7f9f2]">
@@ -204,30 +257,11 @@ export function LandingPage() {
       </header>
 
       <main className="relative mx-auto w-[min(1200px,92vw)] pb-24 md:pb-32 font-monoSans text-[#f7f9f2]">
+        <div className="page-blueprint-guides" aria-hidden="true">
+          <span className="blueprint-guide blueprint-guide-left" />
+          <span className="blueprint-guide blueprint-guide-right" />
+        </div>
         <div className="parallax-field" aria-hidden="true">
-          {blobLayers.map((blob, index) => (
-            <span
-              key={`blob-${index}`}
-              className="parallax-blob-wrap"
-              style={
-                {
-                  '--x': blob.x,
-                  '--y': blob.y,
-                  '--size': blob.size,
-                  '--speed': `${blob.speed}`,
-                  '--drift-x': blob.driftX,
-                  '--drift-y': blob.driftY,
-                  '--duration': blob.duration,
-                  '--delay': blob.delay,
-                  '--blur': blob.blur,
-                  '--opacity': `${blob.opacity}`,
-                  '--hue': `${blob.hue}`
-                } as CSSProperties
-              }
-            >
-              <span className="parallax-blob" />
-            </span>
-          ))}
           {manifoldLayers.map((layer, index) => (
             <span
               key={`manifold-${index}`}
@@ -294,22 +328,23 @@ export function LandingPage() {
                 ))}
               </svg>
             </div>
-
+            <span className="section-blob" style={{ '--x': '26%', '--y': '26%', '--size': '30rem', '--hue': '154', '--alpha': '0.26', '--drift-x': '122px', '--drift-y': '-58px', '--duration': '11.2s', '--delay': '-2.4s' } as CSSProperties} aria-hidden="true" />
+            <span className="section-blob" style={{ '--x': '84%', '--y': '70%', '--size': '34rem', '--hue': '168', '--alpha': '0.24', '--drift-x': '-110px', '--drift-y': '62px', '--duration': '12.1s', '--delay': '-5.1s' } as CSSProperties} aria-hidden="true" />
             <div className="relative z-10 mx-auto flex min-h-[calc(88vh-10rem)] w-[min(1200px,92vw)] flex-col justify-between gap-10">
-              <div className="w-full max-w-[860px]">
+              <div className="w-full max-w-[860px] pt-[8vh] md:pt-[12vh]">
                 <p className="eyebrow hero-eyebrow reveal" data-reveal>
                   Consulting + Contracting Studio
                 </p>
-                <h1 className="reveal font-display text-[clamp(2.2rem,5.8vw,5.8rem)] leading-[1.05] tracking-[-0.022em]" data-reveal>
+                <h1 className="reveal font-display text-[clamp(1.8rem,4.8vw,4.6rem)] font-extrabold leading-[1.05] tracking-[0.09em]" data-reveal>
                   Applied Intelligence, <span className="gradient-text">Built for Real-World</span> Delivery.
                 </h1>
               </div>
 
-              <div className="w-full max-w-[64ch] pb-[max(1.25rem,env(safe-area-inset-bottom))] md:pb-8">
-                <p className="reveal text-[clamp(1rem,1.5vw,1.24rem)] text-[#d4dec7]" data-reveal>
+              <div className="ml-auto w-full max-w-[64ch] pb-[max(1.25rem,env(safe-area-inset-bottom))] text-right md:pb-8">
+                <p className="reveal ml-auto text-[clamp(1rem,1.5vw,1.24rem)] text-[#d4dec7]" data-reveal>
                   Terreaux builds applied AI platforms, agenic systems, and production-grade MLOps/LLMOps architectures for teams that need outcomes, not prototypes.
                 </p>
-                <div className="reveal mt-8 flex flex-wrap gap-3" data-reveal>
+                <div className="reveal mt-8 flex flex-wrap justify-end gap-3" data-reveal>
                   <Button asChild>
                     <a href="#contact">Book Discovery Call</a>
                   </Button>
@@ -321,15 +356,16 @@ export function LandingPage() {
             </div>
           </section>
 
-        <section id="services" className="scroll-mt-28 py-24 md:py-32">
-          <div className="reveal mb-12 md:mb-14" data-reveal>
+        <section id="services" className="relative scroll-mt-28 py-24 md:py-32">
+          <span className="section-blob" style={{ '--x': '80%', '--y': '22%', '--size': '32rem', '--hue': '150', '--alpha': '0.24', '--drift-x': '-132px', '--drift-y': '-48px', '--duration': '11.7s', '--delay': '-4.2s' } as CSSProperties} aria-hidden="true" />
+          <div className="relative z-10 reveal mb-12 md:mb-14" data-reveal>
             <p className="eyebrow">Core Expertise</p>
             <h2 className="max-w-[21ch] font-display text-[clamp(1.6rem,4vw,3.25rem)] leading-[1.05]">
               End-to-end delivery from strategy to stable production.
             </h2>
           </div>
 
-          <div className="grid grid-cols-1 gap-5 md:grid-cols-2 md:gap-6">
+          <div className="relative z-10 grid grid-cols-1 gap-5 md:grid-cols-2 md:gap-6">
             {serviceCards.map((card) => (
               <Card key={card.title} className="reveal" data-reveal>
                 <CardHeader>
@@ -341,15 +377,17 @@ export function LandingPage() {
           </div>
         </section>
 
-        <section id="approach" className="scroll-mt-28 py-24 md:py-32">
-          <div className="reveal mb-12 md:mb-14" data-reveal>
+        <section id="approach" className="relative scroll-mt-28 py-24 md:py-32">
+          <span className="section-blob" style={{ '--x': '14%', '--y': '26%', '--size': '30rem', '--hue': '160', '--alpha': '0.25', '--drift-x': '116px', '--drift-y': '-64px', '--duration': '11s', '--delay': '-3.3s' } as CSSProperties} aria-hidden="true" />
+          <span className="section-blob" style={{ '--x': '82%', '--y': '82%', '--size': '34rem', '--hue': '146', '--alpha': '0.22', '--drift-x': '-104px', '--drift-y': '58px', '--duration': '12.4s', '--delay': '-6.2s' } as CSSProperties} aria-hidden="true" />
+          <div className="relative z-10 reveal mb-12 md:mb-14" data-reveal>
             <p className="eyebrow">How We Work</p>
             <h2 className="max-w-[21ch] font-display text-[clamp(1.6rem,4vw,3.25rem)] leading-[1.05]">
               Lean teams, fast cycles, and clear accountability.
             </h2>
           </div>
 
-          <div className="grid gap-5 md:gap-6">
+          <div className="relative z-10 grid gap-5 md:gap-6">
             {timelineItems.map((item) => (
               <div key={item.step} className="reveal rounded-[18px] border border-[#adc9915a] bg-[#0b0e0ad9] px-5 py-4" data-reveal>
                 <span className="font-display text-sm tracking-[0.15em] text-[#c3e8b1]">{item.step}</span>
@@ -360,9 +398,10 @@ export function LandingPage() {
           </div>
         </section>
 
-        <section id="contact" className="scroll-mt-28 pt-24 pb-28 md:pt-32 md:pb-36">
+        <section id="contact" className="relative scroll-mt-28 pt-24 pb-28 md:pt-32 md:pb-36">
+          <span className="section-blob" style={{ '--x': '22%', '--y': '20%', '--size': '30rem', '--hue': '172', '--alpha': '0.22', '--drift-x': '90px', '--drift-y': '-54px', '--duration': '10.2s', '--delay': '-2.1s' } as CSSProperties} aria-hidden="true" />
           <div
-            className="reveal grid gap-8 rounded-3xl border border-[#bcd69f59] bg-[linear-gradient(175deg,rgba(16,21,14,0.95),rgba(8,10,7,0.99))] p-[clamp(1.2rem,3vw,2.2rem)] md:grid-cols-[1.05fr_1fr] md:gap-10"
+            className="relative z-10 reveal grid gap-8 rounded-3xl border border-[#bcd69f59] bg-[linear-gradient(175deg,rgba(16,21,14,0.95),rgba(8,10,7,0.99))] p-[clamp(1.2rem,3vw,2.2rem)] md:grid-cols-[1.05fr_1fr] md:gap-10"
             data-reveal
           >
             <div>
@@ -382,6 +421,10 @@ export function LandingPage() {
             <div>
               <ContactForm />
             </div>
+          </div>
+          <div className="last-section-tail" aria-hidden="true">
+            <span className="last-section-cross last-section-cross-left" />
+            <span className="last-section-cross last-section-cross-right" />
           </div>
         </section>
         </div>
