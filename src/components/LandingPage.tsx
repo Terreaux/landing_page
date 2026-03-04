@@ -1,5 +1,6 @@
 import { type CSSProperties, useEffect } from 'react';
 
+import { ContactForm } from '@/components/ContactForm';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 
@@ -149,12 +150,12 @@ export function LandingPage() {
           <a href="#approach" className="transition-colors hover:text-[#f7f9f2]">
             Approach
           </a>
-          <a href="/contact" className="transition-colors hover:text-[#f7f9f2]">
+          <a href="#contact" className="transition-colors hover:text-[#f7f9f2]">
             Contact
           </a>
         </nav>
         <Button asChild variant="outline" size="sm">
-          <a href="/contact">Start a Project</a>
+          <a href="#contact">Start a Project</a>
         </Button>
       </header>
 
@@ -239,7 +240,7 @@ export function LandingPage() {
             </p>
             <div className="reveal mt-8 flex flex-wrap gap-3" data-reveal>
               <Button asChild>
-                <a href="/contact">Book Discovery Call</a>
+                <a href="#contact">Book Discovery Call</a>
               </Button>
               <Button asChild variant="ghost">
                 <a href="#services">See Capabilities</a>
@@ -290,22 +291,25 @@ export function LandingPage() {
 
         <section id="contact" className="scroll-mt-28 pt-24 pb-28 md:pt-32 md:pb-36">
           <div
-            className="reveal rounded-3xl border border-[#bcd69f59] bg-[linear-gradient(175deg,rgba(16,21,14,0.95),rgba(8,10,7,0.99))] p-[clamp(1.2rem,3vw,2.2rem)]"
+            className="reveal grid gap-8 rounded-3xl border border-[#bcd69f59] bg-[linear-gradient(175deg,rgba(16,21,14,0.95),rgba(8,10,7,0.99))] p-[clamp(1.2rem,3vw,2.2rem)] md:grid-cols-[1.05fr_1fr] md:gap-10"
             data-reveal
           >
             <div>
-              <p className="eyebrow">Get in Touch</p>
+              <p className="eyebrow">Let&apos;s Build</p>
               <h2 className="font-display text-[clamp(1.7rem,4vw,3rem)] leading-[1.05]">
-                Ready to discuss your project?
+                Need an AI partner that can execute in production?
               </h2>
               <p className="mt-3 max-w-[56ch] text-[#d0d9c3]">
-                Use the dedicated contact page to share your goals, timeline, and constraints.
+                Share your objective, timeline, and constraints. We&apos;ll reply with a practical roadmap.
               </p>
               <div className="mt-6">
-                <Button asChild>
-                  <a href="/contact">Open Contact Form</a>
-                </Button>
+                <a className="text-sm text-[#c4ceba] underline-offset-4 hover:underline" href="/contact">
+                  Dedicated campaign page: /contact
+                </a>
               </div>
+            </div>
+            <div>
+              <ContactForm />
             </div>
           </div>
         </section>
