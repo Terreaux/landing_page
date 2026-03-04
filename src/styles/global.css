@@ -9,7 +9,16 @@
 
 html,
 body {
-  @apply m-0 min-h-full overflow-x-hidden bg-[#060706] p-0 font-body text-[#f7f9f2];
+  @apply m-0 min-h-full overflow-x-hidden bg-[#060706] p-0 font-monoSans text-[#f7f9f2];
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  @apply font-display;
 }
 
 .site-bg {

@@ -203,7 +203,7 @@ export function LandingPage() {
         </Button>
       </header>
 
-      <main className="relative mx-auto w-[min(1200px,92vw)] pb-24 md:pb-32 font-body text-[#f7f9f2]">
+      <main className="relative mx-auto w-[min(1200px,92vw)] pb-24 md:pb-32 font-monoSans text-[#f7f9f2]">
         <div className="parallax-field" aria-hidden="true">
           {blobLayers.map((blob, index) => (
             <span
@@ -272,51 +272,54 @@ export function LandingPage() {
         </div>
 
         <div className="relative z-10">
-        <section className="relative left-1/2 grid min-h-[88vh] w-screen -translate-x-1/2 items-center py-20">
-          <div className="soil-field" aria-hidden="true">
-            <svg className="contour-mesh" viewBox="0 0 1800 980" preserveAspectRatio="xMidYMid slice">
-              {meshLines.map((line) => (
-                <path
-                  key={line.key}
-                  className="mesh-path"
-                  d={line.d}
-                  style={
-                    {
-                      '--offset': line.offset,
-                      '--stroke': line.stroke,
-                      '--opacity': line.opacity,
-                      '--phase': line.phase,
-                      '--duration': line.duration,
-                      '--delay': line.delay
-                    } as CSSProperties
-                  }
-                />
-              ))}
-            </svg>
-          </div>
+          <section className="relative left-1/2 min-h-[88vh] w-screen -translate-x-1/2 py-20">
+            <div className="soil-field" aria-hidden="true">
+              <svg className="contour-mesh" viewBox="0 0 1800 980" preserveAspectRatio="xMidYMid slice">
+                {meshLines.map((line) => (
+                  <path
+                    key={line.key}
+                    className="mesh-path"
+                    d={line.d}
+                    style={
+                      {
+                        '--offset': line.offset,
+                        '--stroke': line.stroke,
+                        '--opacity': line.opacity,
+                        '--phase': line.phase,
+                        '--duration': line.duration,
+                        '--delay': line.delay
+                      } as CSSProperties
+                    }
+                  />
+                ))}
+              </svg>
+            </div>
 
-          <div className="relative z-10 mx-auto w-[min(1200px,92vw)]">
-            <div className="w-full max-w-[860px]">
-            <p className="eyebrow hero-eyebrow reveal" data-reveal>
-              Consulting + Contracting Studio
-            </p>
-            <h1 className="reveal font-display text-[clamp(2.6rem,7vw,7.1rem)] leading-[1.05] tracking-[-0.022em]" data-reveal>
-              Applied Intelligence, <span className="gradient-text">Built for Real-World</span> Delivery.
-            </h1>
-            <p className="reveal mt-6 max-w-[64ch] text-[clamp(1rem,1.5vw,1.24rem)] text-[#d4dec7]" data-reveal>
-              Terreaux builds applied AI platforms, agenic systems, and production-grade MLOps/LLMOps architectures for teams that need outcomes, not prototypes.
-            </p>
-            <div className="reveal mt-8 flex flex-wrap gap-3" data-reveal>
-              <Button asChild>
-                <a href="#contact">Book Discovery Call</a>
-              </Button>
-              <Button asChild variant="ghost">
-                <a href="#services">See Capabilities</a>
-              </Button>
+            <div className="relative z-10 mx-auto flex min-h-[calc(88vh-10rem)] w-[min(1200px,92vw)] flex-col justify-between gap-10">
+              <div className="w-full max-w-[860px]">
+                <p className="eyebrow hero-eyebrow reveal" data-reveal>
+                  Consulting + Contracting Studio
+                </p>
+                <h1 className="reveal font-display text-[clamp(2.2rem,5.8vw,5.8rem)] leading-[1.05] tracking-[-0.022em]" data-reveal>
+                  Applied Intelligence, <span className="gradient-text">Built for Real-World</span> Delivery.
+                </h1>
+              </div>
+
+              <div className="w-full max-w-[64ch] pb-[max(1.25rem,env(safe-area-inset-bottom))] md:pb-8">
+                <p className="reveal text-[clamp(1rem,1.5vw,1.24rem)] text-[#d4dec7]" data-reveal>
+                  Terreaux builds applied AI platforms, agenic systems, and production-grade MLOps/LLMOps architectures for teams that need outcomes, not prototypes.
+                </p>
+                <div className="reveal mt-8 flex flex-wrap gap-3" data-reveal>
+                  <Button asChild>
+                    <a href="#contact">Book Discovery Call</a>
+                  </Button>
+                  <Button asChild variant="ghost">
+                    <a href="#services">See Capabilities</a>
+                  </Button>
+                </div>
+              </div>
             </div>
-            </div>
-          </div>
-        </section>
+          </section>
 
         <section id="services" className="scroll-mt-28 py-24 md:py-32">
           <div className="reveal mb-12 md:mb-14" data-reveal>
