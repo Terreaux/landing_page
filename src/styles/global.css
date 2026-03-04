@@ -4,6 +4,7 @@
 
 :root {
   color-scheme: dark;
+  --parallax-scroll: 0px;
 }
 
 html,
@@ -26,6 +27,10 @@ body {
   @apply mb-4 text-xs font-semibold uppercase tracking-[0.12em] text-[#b6bfab];
 }
 
+.hero-eyebrow {
+  @apply mb-2 tracking-[0.08em];
+}
+
 .gradient-text {
   background-image: linear-gradient(105deg, #85e7ae, #b7ffdb, #d0de9f, #85e7ae);
   background-size: 260% 260%;
@@ -46,26 +51,96 @@ body {
   transform: translateX(-50%);
 }
 
-.mesh-glow {
+.parallax-field {
   position: absolute;
-  inset: 12% 8% 8% 8%;
-  border-radius: 44% 56% 58% 42% / 52% 44% 56% 48%;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.parallax-blob-wrap {
+  position: absolute;
+  left: var(--x);
+  top: var(--y);
+  width: var(--size);
+  aspect-ratio: 1 / 1;
+  transform: translate3d(0, calc(var(--parallax-scroll) * var(--speed)), 0);
+  will-change: transform;
+}
+
+.parallax-blob {
+  width: 100%;
+  height: 100%;
+  border-radius: 54% 46% 44% 56% / 51% 58% 42% 49%;
   background:
-    radial-gradient(circle at 62% 38%, rgba(154, 210, 139, 0.22), rgba(90, 132, 78, 0.08) 48%, transparent 72%),
-    radial-gradient(circle at 35% 66%, rgba(112, 162, 101, 0.16), transparent 58%);
-  filter: blur(12px);
-  opacity: 0.58;
+    radial-gradient(circle at 30% 30%, hsla(var(--hue), 45%, 76%, 0.5), transparent 62%),
+    radial-gradient(circle at 70% 60%, hsla(calc(var(--hue) - 12), 40%, 52%, 0.34), transparent 70%);
+  filter: blur(var(--blur));
+  opacity: var(--opacity);
+  animation: blobFloat var(--duration) ease-in-out infinite alternate;
+  animation-delay: var(--delay);
+  will-change: transform;
+}
+
+.parallax-manifold {
+  position: absolute;
+  left: var(--x);
+  top: var(--y);
+  width: var(--width);
+  height: var(--height);
+  opacity: var(--opacity);
+  background-image: url("data:image/svg+xml,%3Csvg width='1900' height='420' viewBox='0 0 1900 420' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cg stroke='%23C1E9AE' stroke-opacity='0.25' stroke-width='1.2'%3E%3Cpath d='M-30 250C160 130 318 332 504 236C672 148 828 332 998 242C1174 152 1344 336 1536 248C1692 178 1798 244 1930 220'/%3E%3Cpath d='M-50 312C124 192 282 356 472 286C652 218 828 382 1012 306C1204 226 1374 392 1562 312C1722 244 1830 310 1948 282'/%3E%3Cpath d='M-80 174C98 56 270 250 446 164C644 66 786 266 984 180C1180 92 1338 272 1538 188C1700 118 1818 176 1934 150'/%3E%3C/g%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  transform: translate3d(0, calc(var(--parallax-scroll) * var(--speed)), 0) rotate(var(--rotate));
+  will-change: transform;
+  filter: blur(0.2px);
 }
 
 .contour-mesh {
   position: absolute;
   inset: 2% 4% 6% 4%;
-  background-image: url("data:image/svg+xml,%3Csvg width='1600' height='980' viewBox='0 0 1600 980' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cg stroke='%23BFE6A6' stroke-opacity='0.28' stroke-width='1.25'%3E%3Cpath d='M-40 640C120 540 260 710 430 620C610 522 730 690 920 596C1120 496 1300 660 1640 560'/%3E%3Cpath d='M-40 580C130 470 292 640 468 556C648 470 780 632 962 544C1160 450 1328 620 1640 512'/%3E%3Cpath d='M-40 512C142 392 304 570 498 490C700 408 816 574 1010 486C1208 398 1372 560 1640 452'/%3E%3Cpath d='M-40 440C154 312 324 500 522 422C716 346 858 514 1046 420C1260 316 1396 486 1640 388'/%3E%3Cpath d='M-40 356C170 236 356 432 556 346C760 262 892 436 1096 348C1288 264 1440 418 1640 332'/%3E%3Cpath d='M-40 280C194 168 382 366 600 272C802 186 950 360 1160 270C1346 188 1478 336 1640 258'/%3E%3C/g%3E%3C/svg%3E");
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-position: center;
-  mask-image: radial-gradient(ellipse at 52% 48%, black 34%, transparent 84%);
-  opacity: 0.64;
+  width: calc(100% - 8%);
+  height: calc(100% - 8%);
+  mask-image: radial-gradient(ellipse at 52% 50%, black 42%, transparent 92%);
+  opacity: 0.8;
+}
+
+.mesh-path {
+  fill: none;
+  stroke: #2f3f4b;
+  stroke-width: var(--stroke);
+  stroke-linecap: round;
+  opacity: var(--opacity);
+  transform: translate3d(calc(var(--phase) * -1), var(--offset), 0);
+  animation: meshPhase var(--duration) ease-in-out infinite;
+  animation-delay: var(--delay);
+  will-change: transform;
+}
+
+@keyframes blobFloat {
+  0% {
+    transform: translate3d(calc(var(--drift-x) * -1), calc(var(--drift-y) * -1), 0) scale(0.985);
+  }
+  50% {
+    transform: translate3d(calc(var(--drift-x) * 0.35), calc(var(--drift-y) * 0.55), 0) scale(1.012);
+  }
+  100% {
+    transform: translate3d(var(--drift-x), var(--drift-y), 0) scale(0.994);
+  }
+}
+
+@keyframes meshPhase {
+  0% {
+    transform: translate3d(calc(var(--phase) * -1), var(--offset), 0);
+  }
+  50% {
+    transform: translate3d(var(--phase), var(--offset), 0);
+  }
+  100% {
+    transform: translate3d(calc(var(--phase) * -1), var(--offset), 0);
+  }
 }
 
 .reveal {
@@ -83,6 +158,20 @@ body {
 }
 
 @media (prefers-reduced-motion: reduce) {
+  :root {
+    --parallax-scroll: 0px;
+  }
+
+  .parallax-blob-wrap,
+  .parallax-manifold {
+    transform: none;
+  }
+
+  .parallax-blob,
+  .mesh-path {
+    animation: none;
+  }
+
   *,
   *::before,
   *::after {

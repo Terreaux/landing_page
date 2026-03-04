@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { type CSSProperties, useEffect } from 'react';
 
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
@@ -40,6 +40,52 @@ const timelineItems = [
   }
 ];
 
+const blobLayers = [
+  { x: '72%', y: '10%', size: '12.8rem', blur: '12px', opacity: 0.19, speed: -0.04, hue: 88, driftX: '0.8rem', driftY: '0.65rem', duration: '14s', delay: '-2.4s' },
+  { x: '30%', y: '17%', size: '9.4rem', blur: '10px', opacity: 0.16, speed: 0.06, hue: 110, driftX: '0.5rem', driftY: '0.8rem', duration: '17s', delay: '-5.1s' },
+  { x: '84%', y: '23%', size: '14.8rem', blur: '13px', opacity: 0.17, speed: -0.05, hue: 96, driftX: '0.95rem', driftY: '0.7rem', duration: '16s', delay: '-3.7s' },
+  { x: '12%', y: '31%', size: '11.2rem', blur: '11px', opacity: 0.19, speed: 0.04, hue: 114, driftX: '0.75rem', driftY: '0.55rem', duration: '15s', delay: '-6.2s' },
+  { x: '48%', y: '39%', size: '8.8rem', blur: '10px', opacity: 0.15, speed: -0.07, hue: 92, driftX: '0.6rem', driftY: '0.9rem', duration: '18s', delay: '-1.8s' },
+  { x: '76%', y: '46%', size: '13.6rem', blur: '12px', opacity: 0.17, speed: 0.05, hue: 101, driftX: '0.85rem', driftY: '0.7rem', duration: '15.5s', delay: '-7.4s' },
+  { x: '20%', y: '55%', size: '10.1rem', blur: '10px', opacity: 0.18, speed: -0.03, hue: 108, driftX: '0.55rem', driftY: '0.75rem', duration: '16.4s', delay: '-4.9s' },
+  { x: '60%', y: '63%', size: '15.2rem', blur: '13px', opacity: 0.16, speed: 0.04, hue: 94, driftX: '1rem', driftY: '0.85rem', duration: '19s', delay: '-8.4s' },
+  { x: '6%', y: '71%', size: '9.6rem', blur: '10px', opacity: 0.15, speed: -0.06, hue: 112, driftX: '0.65rem', driftY: '0.6rem', duration: '14.8s', delay: '-2.9s' },
+  { x: '82%', y: '79%', size: '12.4rem', blur: '11px', opacity: 0.17, speed: 0.05, hue: 99, driftX: '0.8rem', driftY: '0.95rem', duration: '17.6s', delay: '-6.8s' },
+  { x: '40%', y: '88%', size: '16.4rem', blur: '14px', opacity: 0.18, speed: -0.04, hue: 90, driftX: '1.1rem', driftY: '0.8rem', duration: '20s', delay: '-9.3s' },
+  { x: '56%', y: '93%', size: '11rem', blur: '11px', opacity: 0.15, speed: 0.03, hue: 106, driftX: '0.7rem', driftY: '0.65rem', duration: '15.9s', delay: '-3.5s' }
+];
+
+const manifoldLayers = [
+  { x: '-8%', y: '7%', width: '120%', height: '20rem', speed: 0.03, rotate: '-4deg', opacity: 0.26 },
+  { x: '-3%', y: '19%', width: '114%', height: '16rem', speed: -0.04, rotate: '3deg', opacity: 0.2 },
+  { x: '-10%', y: '34%', width: '126%', height: '18rem', speed: 0.05, rotate: '-2deg', opacity: 0.23 },
+  { x: '-2%', y: '48%', width: '112%', height: '15rem', speed: -0.03, rotate: '2deg', opacity: 0.19 },
+  { x: '-8%', y: '62%', width: '118%', height: '18rem', speed: 0.04, rotate: '-3deg', opacity: 0.22 },
+  { x: '-4%', y: '77%', width: '116%', height: '17rem', speed: -0.05, rotate: '3deg', opacity: 0.2 }
+];
+
+const meshLines = Array.from({ length: 22 }, (_, index) => ({
+  key: `lower-${index}`,
+  d: 'M-120 620C150 410 340 740 568 596C772 468 980 704 1218 586C1452 466 1650 618 1960 554',
+  offset: `${index * 14 - 58}px`,
+  stroke: index % 5 === 0 ? '0.95' : '0.78',
+  opacity: `${0.14 + (index % 4) * 0.035}`,
+  phase: `${10 + (index % 6) * 3}px`,
+  duration: `${24 + (index % 5) * 3}s`,
+  delay: `${index * -0.7}s`
+})).concat(
+  Array.from({ length: 14 }, (_, index) => ({
+    key: `upper-${index}`,
+    d: 'M-100 418C148 232 350 526 574 422C790 322 996 520 1212 418C1434 320 1628 484 1944 428',
+    offset: `${index * 12 - 46}px`,
+    stroke: index % 4 === 0 ? '0.85' : '0.72',
+    opacity: `${0.12 + (index % 3) * 0.03}`,
+    phase: `${8 + (index % 5) * 2.5}px`,
+    duration: `${20 + (index % 4) * 2.6}s`,
+    delay: `${index * -0.9}s`
+  }))
+);
+
 export function LandingPage() {
   useEffect(() => {
     const revealItems = document.querySelectorAll<HTMLElement>('[data-reveal]');
@@ -54,8 +100,8 @@ export function LandingPage() {
         });
       },
       {
-        threshold: 0.18,
-        rootMargin: '0px 0px -8% 0px'
+        threshold: 0.12,
+        rootMargin: '0px 0px -6% 0px'
       }
     );
 
@@ -64,7 +110,30 @@ export function LandingPage() {
       observer.observe(item);
     });
 
-    return () => observer.disconnect();
+    let rafId = 0;
+
+    const updateParallax = () => {
+      document.documentElement.style.setProperty('--parallax-scroll', `${window.scrollY}px`);
+      rafId = 0;
+    };
+
+    const handleScroll = () => {
+      if (rafId !== 0) return;
+      rafId = window.requestAnimationFrame(updateParallax);
+    };
+
+    updateParallax();
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    window.addEventListener('resize', handleScroll);
+
+    return () => {
+      observer.disconnect();
+      window.removeEventListener('scroll', handleScroll);
+      window.removeEventListener('resize', handleScroll);
+      if (rafId !== 0) {
+        window.cancelAnimationFrame(rafId);
+      }
+    };
   }, []);
 
   return (
@@ -80,36 +149,97 @@ export function LandingPage() {
           <a href="#approach" className="transition-colors hover:text-[#f7f9f2]">
             Approach
           </a>
-          <a href="#contact" className="transition-colors hover:text-[#f7f9f2]">
+          <a href="/contact" className="transition-colors hover:text-[#f7f9f2]">
             Contact
           </a>
         </nav>
         <Button asChild variant="outline" size="sm">
-          <a href="#contact">Start a Project</a>
+          <a href="/contact">Start a Project</a>
         </Button>
       </header>
 
-      <main className="mx-auto w-[min(1200px,92vw)] pb-16 font-body text-[#f7f9f2]">
+      <main className="relative mx-auto w-[min(1200px,92vw)] pb-24 md:pb-32 font-body text-[#f7f9f2]">
+        <div className="parallax-field" aria-hidden="true">
+          {blobLayers.map((blob, index) => (
+            <span
+              key={`blob-${index}`}
+              className="parallax-blob-wrap"
+              style={
+                {
+                  '--x': blob.x,
+                  '--y': blob.y,
+                  '--size': blob.size,
+                  '--speed': `${blob.speed}`,
+                  '--drift-x': blob.driftX,
+                  '--drift-y': blob.driftY,
+                  '--duration': blob.duration,
+                  '--delay': blob.delay,
+                  '--blur': blob.blur,
+                  '--opacity': `${blob.opacity}`,
+                  '--hue': `${blob.hue}`
+                } as CSSProperties
+              }
+            >
+              <span className="parallax-blob" />
+            </span>
+          ))}
+          {manifoldLayers.map((layer, index) => (
+            <span
+              key={`manifold-${index}`}
+              className="parallax-manifold"
+              style={
+                {
+                  '--x': layer.x,
+                  '--y': layer.y,
+                  '--width': layer.width,
+                  '--height': layer.height,
+                  '--speed': `${layer.speed}`,
+                  '--rotate': layer.rotate,
+                  '--opacity': `${layer.opacity}`
+                } as CSSProperties
+              }
+            />
+          ))}
+        </div>
+
+        <div className="relative z-10">
         <section className="relative left-1/2 grid min-h-[88vh] w-screen -translate-x-1/2 items-center py-20">
           <div className="soil-field" aria-hidden="true">
-            <span className="mesh-glow" />
-            <span className="contour-mesh" />
+            <svg className="contour-mesh" viewBox="0 0 1800 980" preserveAspectRatio="xMidYMid slice">
+              {meshLines.map((line) => (
+                <path
+                  key={line.key}
+                  className="mesh-path"
+                  d={line.d}
+                  style={
+                    {
+                      '--offset': line.offset,
+                      '--stroke': line.stroke,
+                      '--opacity': line.opacity,
+                      '--phase': line.phase,
+                      '--duration': line.duration,
+                      '--delay': line.delay
+                    } as CSSProperties
+                  }
+                />
+              ))}
+            </svg>
           </div>
 
           <div className="relative z-10 mx-auto w-[min(1200px,92vw)]">
             <div className="w-full max-w-[860px]">
-            <p className="eyebrow reveal" data-reveal>
+            <p className="eyebrow hero-eyebrow reveal" data-reveal>
               Consulting + Contracting Studio
             </p>
             <h1 className="reveal font-display text-[clamp(2.6rem,7vw,7.1rem)] leading-[1.05] tracking-[-0.022em]" data-reveal>
-              Applied Intelligence, <span className="gradient-text">Engineered for Real-World</span> Delivery.
+              Applied Intelligence, <span className="gradient-text">Built for Real-World</span> Delivery.
             </h1>
             <p className="reveal mt-6 max-w-[64ch] text-[clamp(1rem,1.5vw,1.24rem)] text-[#d4dec7]" data-reveal>
               Terreaux builds applied AI platforms, agenic systems, and production-grade MLOps/LLMOps architectures for teams that need outcomes, not prototypes.
             </p>
             <div className="reveal mt-8 flex flex-wrap gap-3" data-reveal>
               <Button asChild>
-                <a href="#contact">Book Discovery Call</a>
+                <a href="/contact">Book Discovery Call</a>
               </Button>
               <Button asChild variant="ghost">
                 <a href="#services">See Capabilities</a>
@@ -119,15 +249,15 @@ export function LandingPage() {
           </div>
         </section>
 
-        <section id="services" className="py-16">
-          <div className="reveal mb-8" data-reveal>
+        <section id="services" className="scroll-mt-28 py-24 md:py-32">
+          <div className="reveal mb-12 md:mb-14" data-reveal>
             <p className="eyebrow">Core Expertise</p>
             <h2 className="max-w-[21ch] font-display text-[clamp(1.6rem,4vw,3.25rem)] leading-[1.05]">
               End-to-end delivery from strategy to stable production.
             </h2>
           </div>
 
-          <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
+          <div className="grid grid-cols-1 gap-5 md:grid-cols-2 md:gap-6">
             {serviceCards.map((card) => (
               <Card key={card.title} className="reveal" data-reveal>
                 <CardHeader>
@@ -139,15 +269,15 @@ export function LandingPage() {
           </div>
         </section>
 
-        <section id="approach" className="py-16">
-          <div className="reveal mb-8" data-reveal>
+        <section id="approach" className="scroll-mt-28 py-24 md:py-32">
+          <div className="reveal mb-12 md:mb-14" data-reveal>
             <p className="eyebrow">How We Work</p>
             <h2 className="max-w-[21ch] font-display text-[clamp(1.6rem,4vw,3.25rem)] leading-[1.05]">
               Lean teams, fast cycles, and clear accountability.
             </h2>
           </div>
 
-          <div className="grid gap-4">
+          <div className="grid gap-5 md:gap-6">
             {timelineItems.map((item) => (
               <div key={item.step} className="reveal rounded-[18px] border border-[#adc9915a] bg-[#0b0e0ad9] px-5 py-4" data-reveal>
                 <span className="font-display text-sm tracking-[0.15em] text-[#c3e8b1]">{item.step}</span>
@@ -158,22 +288,28 @@ export function LandingPage() {
           </div>
         </section>
 
-        <section id="contact" className="py-16">
-          <div className="reveal rounded-3xl border border-[#bcd69f59] bg-[linear-gradient(175deg,rgba(16,21,14,0.95),rgba(8,10,7,0.99))] p-[clamp(1.2rem,3vw,2.2rem)]" data-reveal>
-            <p className="eyebrow">Let&apos;s Build</p>
-            <h2 className="font-display text-[clamp(1.7rem,4vw,3rem)] leading-[1.05]">
-              Need an AI partner that can execute in production?
-            </h2>
-            <p className="mt-3 max-w-[62ch] text-[#d0d9c3]">
-              Share your objective, timeline, and constraints. We&apos;ll respond with a practical roadmap.
-            </p>
-            <div className="mt-6">
-              <Button asChild>
-                <a href="mailto:hello@terreaux.ai">hello@terreaux.ai</a>
-              </Button>
+        <section id="contact" className="scroll-mt-28 pt-24 pb-28 md:pt-32 md:pb-36">
+          <div
+            className="reveal rounded-3xl border border-[#bcd69f59] bg-[linear-gradient(175deg,rgba(16,21,14,0.95),rgba(8,10,7,0.99))] p-[clamp(1.2rem,3vw,2.2rem)]"
+            data-reveal
+          >
+            <div>
+              <p className="eyebrow">Get in Touch</p>
+              <h2 className="font-display text-[clamp(1.7rem,4vw,3rem)] leading-[1.05]">
+                Ready to discuss your project?
+              </h2>
+              <p className="mt-3 max-w-[56ch] text-[#d0d9c3]">
+                Use the dedicated contact page to share your goals, timeline, and constraints.
+              </p>
+              <div className="mt-6">
+                <Button asChild>
+                  <a href="/contact">Open Contact Form</a>
+                </Button>
+              </div>
             </div>
           </div>
         </section>
+        </div>
       </main>
     </>
   );
