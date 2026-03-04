@@ -1,0 +1,94 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: dark;
+}
+
+html,
+body {
+  @apply m-0 min-h-full overflow-x-hidden bg-[#060706] p-0 font-body text-[#f7f9f2];
+}
+
+.site-bg {
+  position: fixed;
+  inset: 0;
+  z-index: -4;
+  background:
+    radial-gradient(circle at 14% 10%, rgba(145, 209, 150, 0.14), transparent 42%),
+    radial-gradient(circle at 81% 18%, rgba(180, 218, 157, 0.12), transparent 40%),
+    radial-gradient(circle at 50% 90%, rgba(255, 241, 201, 0.05), transparent 55%),
+    linear-gradient(165deg, #050605 0%, #0a0d09 52%, #070905 100%);
+}
+
+.eyebrow {
+  @apply mb-4 text-xs font-semibold uppercase tracking-[0.12em] text-[#b6bfab];
+}
+
+.gradient-text {
+  background-image: linear-gradient(105deg, #85e7ae, #b7ffdb, #d0de9f, #85e7ae);
+  background-size: 260% 260%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: gradientShift 9s ease-in-out infinite;
+}
+
+.soil-field {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  overflow: hidden;
+  left: 50%;
+  width: 100vw;
+  transform: translateX(-50%);
+}
+
+.mesh-glow {
+  position: absolute;
+  inset: 12% 8% 8% 8%;
+  border-radius: 44% 56% 58% 42% / 52% 44% 56% 48%;
+  background:
+    radial-gradient(circle at 62% 38%, rgba(154, 210, 139, 0.22), rgba(90, 132, 78, 0.08) 48%, transparent 72%),
+    radial-gradient(circle at 35% 66%, rgba(112, 162, 101, 0.16), transparent 58%);
+  filter: blur(12px);
+  opacity: 0.58;
+}
+
+.contour-mesh {
+  position: absolute;
+  inset: 2% 4% 6% 4%;
+  background-image: url("data:image/svg+xml,%3Csvg width='1600' height='980' viewBox='0 0 1600 980' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cg stroke='%23BFE6A6' stroke-opacity='0.28' stroke-width='1.25'%3E%3Cpath d='M-40 640C120 540 260 710 430 620C610 522 730 690 920 596C1120 496 1300 660 1640 560'/%3E%3Cpath d='M-40 580C130 470 292 640 468 556C648 470 780 632 962 544C1160 450 1328 620 1640 512'/%3E%3Cpath d='M-40 512C142 392 304 570 498 490C700 408 816 574 1010 486C1208 398 1372 560 1640 452'/%3E%3Cpath d='M-40 440C154 312 324 500 522 422C716 346 858 514 1046 420C1260 316 1396 486 1640 388'/%3E%3Cpath d='M-40 356C170 236 356 432 556 346C760 262 892 436 1096 348C1288 264 1440 418 1640 332'/%3E%3Cpath d='M-40 280C194 168 382 366 600 272C802 186 950 360 1160 270C1346 188 1478 336 1640 258'/%3E%3C/g%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  mask-image: radial-gradient(ellipse at 52% 48%, black 34%, transparent 84%);
+  opacity: 0.64;
+}
+
+.reveal {
+  opacity: 0;
+  transform: translateY(26px) scale(0.982);
+  transition:
+    opacity 1150ms cubic-bezier(0.16, 1, 0.3, 1),
+    transform 1150ms cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: transform, opacity;
+}
+
+.reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
