@@ -1,0 +1,36 @@
+---
+import { ContactForm } from '@/components/ContactForm';
+import BaseLayout from '@/layouts/BaseLayout.astro';
+---
+
+<BaseLayout
+  title="Contact Terreaux | Applied AI Consulting"
+  description="Contact Terreaux to discuss applied AI, agenic systems, MLOps, and LLMOps engagements."
+>
+  <div class="site-bg" aria-hidden="true"></div>
+
+  <header class="sticky top-0 z-20 flex items-center justify-between gap-5 border-b border-[#d1e4b01c] bg-black/60 px-[5vw] py-5 backdrop-blur-md">
+    <a href="/" class="font-display text-base font-extrabold tracking-[0.09em] text-[#f7f9f2] no-underline">TERREAUX</a>
+    <nav class="hidden gap-5 text-sm text-[#b6bfab] md:flex">
+      <a href="/#services" class="transition-colors hover:text-[#f7f9f2]">Services</a>
+      <a href="/#approach" class="transition-colors hover:text-[#f7f9f2]">Approach</a>
+      <a href="/contact" class="text-[#f7f9f2]">Contact</a>
+    </nav>
+  </header>
+
+  <main class="mx-auto w-[min(980px,92vw)] py-16 md:py-24">
+    <section class="rounded-3xl border border-[#bcd69f59] bg-[linear-gradient(175deg,rgba(16,21,14,0.95),rgba(8,10,7,0.99))] p-[clamp(1.2rem,3vw,2.2rem)]">
+      <p class="eyebrow">Contact</p>
+      <h1 class="max-w-[18ch] font-display text-[clamp(2rem,5vw,4.2rem)] leading-[1.04] text-[#f7f9f2]">
+        Tell us what you need to build.
+      </h1>
+      <p class="mt-4 max-w-[62ch] text-[#d0d9c3]">
+        Share your objective, current constraints, and timeline. We will follow up with a practical delivery plan.
+      </p>
+
+      <div class="mt-8 max-w-[720px]">
+        <ContactForm client:load />
+      </div>
+    </section>
+  </main>
+</BaseLayout>
