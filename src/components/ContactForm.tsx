@@ -1,11 +1,11 @@
-import { useMemo, useState } from 'react';
+import { useState } from 'react';
 
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
 
-type SubmitState = 'idle' | 'submitting' | 'success' | 'error';
+type SubmitState = 'idle' | 'submitting' | 'error';
 
 export function ContactForm() {
   const [state, setState] = useState<SubmitState>('idle');
@@ -13,19 +13,7 @@ export function ContactForm() {
 
   const isSubmitting = state === 'submitting';
 
-  const statusCopy = useMemo(() => {
-    if (state === 'success') {
-      return { className: 'text-[#b7ffdb]', text: 'Message sent. We will get back to you shortly.' };
-    }
-
-    if (state === 'error') {
-      return { className: 'text-[#ffb2b2]', text: errorMessage || 'Something went wrong. Please try again.' };
-    }
-
-    return null;
-  }, [errorMessage, state]);
-
-  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     setState('submitting');
     setErrorMessage('');
@@ -39,24 +27,21 @@ export function ContactForm() {
     };
 
     try {
-      const response = await fetch('/api/contact', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(payload)
-      });
-
-      const data = (await response.json()) as { error?: string };
-
-      if (!response.ok) {
-        throw new Error(data.error || 'Unable to send your message right now.');
-      }
-
-      setState('success');
+      const lines = [
+        `Name: ${payload.name}`,
+        `Email: ${payload.email}`,
+        `Company: ${payload.company || 'N/A'}`,
+        '',
+        'Message:',
+        payload.message
+      ];
+      const subject = encodeURIComponent(`New inquiry from ${payload.name}${payload.company ? ` (${payload.company})` : ''}`);
+      const body = encodeURIComponent(lines.join('\n'));
+      window.location.href = `mailto:hello@terreaux.co?subject=${subject}&body=${body}`;
+      setState('idle');
       event.currentTarget.reset();
     } catch (error) {
-      const message = error instanceof Error ? error.message : 'Unable to send your message right now.';
+      const message = error instanceof Error ? error.message : 'Unable to open your email client right now.';
       setState('error');
       setErrorMessage(message);
     }
@@ -96,7 +81,7 @@ export function ContactForm() {
         </Button>
       </div>
 
-      {statusCopy ? <p className={`text-sm ${statusCopy.className}`}>{statusCopy.text}</p> : null}
+      {state === 'error' ? <p className="text-sm text-[#ffb2b2]">{errorMessage || 'Something went wrong. Please try again.'}</p> : null}
     </form>
   );
 }
