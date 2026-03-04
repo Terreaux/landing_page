@@ -98,6 +98,43 @@ body {
   filter: blur(0.2px);
 }
 
+.blueprint-mesh {
+  position: absolute;
+  left: var(--x);
+  top: var(--y);
+  width: var(--width);
+  height: var(--height);
+  opacity: var(--opacity);
+  transform: translate3d(0, calc(var(--parallax-scroll) * var(--speed)), 0) rotate(var(--rotate));
+  animation: blueprintDrift 18s ease-in-out infinite alternate;
+  animation-delay: var(--delay);
+  mix-blend-mode: screen;
+  will-change: transform;
+}
+
+.blueprint-mesh svg {
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+.blueprint-stroke {
+  fill: none;
+  stroke: rgba(196, 219, 233, 0.46);
+  stroke-width: 1.18;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.blueprint-thin {
+  stroke-width: 0.84;
+  opacity: 0.82;
+}
+
+.blueprint-grid {
+  opacity: 0.34;
+}
+
 .contour-mesh {
   position: absolute;
   inset: 2% 4% 6% 4%;
@@ -143,6 +180,18 @@ body {
   }
 }
 
+@keyframes blueprintDrift {
+  0% {
+    transform: translate3d(-10px, calc(var(--parallax-scroll) * var(--speed) - 6px), 0) rotate(var(--rotate));
+  }
+  50% {
+    transform: translate3d(4px, calc(var(--parallax-scroll) * var(--speed) + 4px), 0) rotate(calc(var(--rotate) * 1.02));
+  }
+  100% {
+    transform: translate3d(9px, calc(var(--parallax-scroll) * var(--speed) - 2px), 0) rotate(var(--rotate));
+  }
+}
+
 .reveal {
   opacity: 0;
   transform: translateY(26px) scale(0.982);
@@ -163,12 +212,14 @@ body {
   }
 
   .parallax-blob-wrap,
-  .parallax-manifold {
+  .parallax-manifold,
+  .blueprint-mesh {
     transform: none;
   }
 
   .parallax-blob,
-  .mesh-path {
+  .mesh-path,
+  .blueprint-mesh {
     animation: none;
   }
 
@@ -179,5 +230,13 @@ body {
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
+  }
+}
+
+@media (max-width: 780px) {
+  .blueprint-mesh {
+    width: calc(var(--width) * 0.72);
+    height: calc(var(--height) * 0.72);
+    opacity: calc(var(--opacity) * 0.75);
   }
 }

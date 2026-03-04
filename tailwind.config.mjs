@@ -14,7 +14,8 @@ export default {
       },
       fontFamily: {
         display: ['Syne', 'sans-serif'],
-        body: ['Manrope', 'system-ui', 'sans-serif']
+        body: ['Manrope', 'system-ui', 'sans-serif'],
+        monoSans: ['Space Mono', 'ui-monospace', 'SFMono-Regular', 'Menlo', 'Monaco', 'Consolas', 'Liberation Mono', 'Courier New', 'monospace']
       },
       keyframes: {
         gradientShift: {
