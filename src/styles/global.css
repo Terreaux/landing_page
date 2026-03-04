@@ -5,6 +5,8 @@
 :root {
   color-scheme: dark;
   --parallax-scroll: 0px;
+  --blueprint-edge-offset: max(1rem, 2vw);
+  --blueprint-cross-half: 7px;
 }
 
 html,
@@ -49,6 +51,150 @@ h6 {
   animation: gradientShift 9s ease-in-out infinite;
 }
 
+.blueprint-cross {
+  position: absolute;
+  bottom: -1px;
+  width: 14px;
+  height: 14px;
+  transform: translateY(50%);
+  opacity: 0.7;
+  pointer-events: none;
+}
+
+.blueprint-cross::before,
+.blueprint-cross::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  background: rgba(179, 210, 228, 0.72);
+}
+
+.blueprint-cross::before {
+  width: 14px;
+  height: 1px;
+  transform: translate(-50%, -50%);
+}
+
+.blueprint-cross::after {
+  width: 1px;
+  height: 14px;
+  transform: translate(-50%, -50%);
+}
+
+.blueprint-cross-left {
+  left: var(--blueprint-edge-offset);
+}
+
+.blueprint-cross-right {
+  right: var(--blueprint-edge-offset);
+}
+
+.page-blueprint-guides {
+  position: absolute;
+  inset: 0;
+  left: 50%;
+  width: 100vw;
+  transform: translateX(-50%);
+  pointer-events: none;
+  z-index: 1;
+  opacity: var(--blueprint-guides-opacity, 0);
+  transition: opacity 180ms ease-out;
+}
+
+.blueprint-guide {
+  position: absolute;
+  top: 12px;
+  bottom: 0;
+  width: 1px;
+  background: rgba(179, 210, 228, 0.45);
+  opacity: 0.86;
+}
+
+.blueprint-guide-left {
+  left: var(--blueprint-guide-left-x, calc(var(--blueprint-edge-offset) + var(--blueprint-cross-half)));
+}
+
+.blueprint-guide-right {
+  left: var(--blueprint-guide-right-x, calc(100vw - var(--blueprint-edge-offset) - var(--blueprint-cross-half)));
+}
+
+.section-blob {
+  position: absolute;
+  left: var(--x);
+  top: var(--y);
+  width: calc(var(--size) * 1.32);
+  height: calc(var(--size) * 0.9);
+  transform: translate(-50%, -50%);
+  border-radius: 74% 26% 63% 37% / 38% 71% 29% 62%;
+  pointer-events: none;
+  z-index: 0;
+  background:
+    radial-gradient(circle at 30% 30%, hsla(var(--hue), 64%, 74%, calc(var(--alpha) * 1.45)), transparent 58%),
+    radial-gradient(circle at 72% 62%, hsla(calc(var(--hue) - 18), 58%, 56%, var(--alpha)), transparent 66%),
+    radial-gradient(circle at 52% 52%, rgba(191, 240, 218, 0.18), transparent 74%);
+  filter: blur(18px);
+  opacity: 0.9;
+  animation:
+    sectionBlobFloat var(--duration, 10.5s) ease-in-out infinite alternate,
+    sectionBlobPulse 3.2s ease-in-out infinite;
+  animation-delay: var(--delay, 0s);
+  will-change: transform;
+}
+
+.last-section-tail {
+  position: absolute;
+  left: 50%;
+  bottom: -124px;
+  width: 100vw;
+  height: 112px;
+  transform: translateX(-50%);
+  border-top: 1px solid rgba(209, 228, 176, 0.11);
+  pointer-events: none;
+  overflow: visible;
+  z-index: 2;
+}
+
+.last-section-cross {
+  position: absolute;
+  top: -1px;
+  width: 14px;
+  height: 14px;
+  transform: translate(-50%, -50%);
+  opacity: 0.65;
+  pointer-events: none;
+  z-index: 4;
+}
+
+.last-section-cross::before,
+.last-section-cross::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  background: rgba(179, 210, 228, 0.72);
+}
+
+.last-section-cross::before {
+  width: 14px;
+  height: 1px;
+  transform: translate(-50%, -50%);
+}
+
+.last-section-cross::after {
+  width: 1px;
+  height: 14px;
+  transform: translate(-50%, -50%);
+}
+
+.last-section-cross-left {
+  left: var(--blueprint-guide-left-x, calc(var(--blueprint-edge-offset) + var(--blueprint-cross-half)));
+}
+
+.last-section-cross-right {
+  left: var(--blueprint-guide-right-x, calc(100vw - var(--blueprint-edge-offset) - var(--blueprint-cross-half)));
+}
+
 .soil-field {
   position: absolute;
   inset: 0;
@@ -63,33 +209,9 @@ h6 {
 .parallax-field {
   position: absolute;
   inset: 0;
-  z-index: 0;
+  z-index: 2;
   pointer-events: none;
   overflow: hidden;
-}
-
-.parallax-blob-wrap {
-  position: absolute;
-  left: var(--x);
-  top: var(--y);
-  width: var(--size);
-  aspect-ratio: 1 / 1;
-  transform: translate3d(0, calc(var(--parallax-scroll) * var(--speed)), 0);
-  will-change: transform;
-}
-
-.parallax-blob {
-  width: 100%;
-  height: 100%;
-  border-radius: 54% 46% 44% 56% / 51% 58% 42% 49%;
-  background:
-    radial-gradient(circle at 30% 30%, hsla(var(--hue), 45%, 76%, 0.5), transparent 62%),
-    radial-gradient(circle at 70% 60%, hsla(calc(var(--hue) - 12), 40%, 52%, 0.34), transparent 70%);
-  filter: blur(var(--blur));
-  opacity: var(--opacity);
-  animation: blobFloat var(--duration) ease-in-out infinite alternate;
-  animation-delay: var(--delay);
-  will-change: transform;
 }
 
 .parallax-manifold {
@@ -165,18 +287,6 @@ h6 {
   will-change: transform;
 }
 
-@keyframes blobFloat {
-  0% {
-    transform: translate3d(calc(var(--drift-x) * -1), calc(var(--drift-y) * -1), 0) scale(0.985);
-  }
-  50% {
-    transform: translate3d(calc(var(--drift-x) * 0.35), calc(var(--drift-y) * 0.55), 0) scale(1.012);
-  }
-  100% {
-    transform: translate3d(var(--drift-x), var(--drift-y), 0) scale(0.994);
-  }
-}
-
 @keyframes meshPhase {
   0% {
     transform: translate3d(calc(var(--phase) * -1), var(--offset), 0);
@@ -201,6 +311,36 @@ h6 {
   }
 }
 
+@keyframes sectionBlobFloat {
+  0% {
+    transform: translate(-50%, -50%) translate3d(calc(var(--drift-x, 84px) * -1), calc(var(--drift-y, 62px) * -1), 0) rotate(-7deg) scale(1.06, 0.9);
+    border-radius: 82% 18% 70% 30% / 34% 78% 22% 66%;
+  }
+  50% {
+    transform: translate(-50%, -50%) translate3d(calc(var(--drift-x, 84px) * 0.22), calc(var(--drift-y, 62px) * -0.34), 0) rotate(5deg) scale(1.24, 1.06);
+    border-radius: 22% 78% 26% 74% / 79% 21% 76% 24%;
+  }
+  100% {
+    transform: translate(-50%, -50%) translate3d(var(--drift-x, 84px), var(--drift-y, 62px), 0) rotate(-9deg) scale(0.98, 0.84);
+    border-radius: 88% 12% 74% 26% / 42% 84% 16% 58%;
+  }
+}
+
+@keyframes sectionBlobPulse {
+  0% {
+    opacity: 0.68;
+    filter: blur(15px);
+  }
+  50% {
+    opacity: 0.97;
+    filter: blur(19px);
+  }
+  100% {
+    opacity: 0.74;
+    filter: blur(16px);
+  }
+}
+
 .reveal {
   opacity: 0;
   transform: translateY(26px) scale(0.982);
@@ -220,13 +360,11 @@ h6 {
     --parallax-scroll: 0px;
   }
 
-  .parallax-blob-wrap,
   .parallax-manifold,
   .blueprint-mesh {
     transform: none;
   }
 
-  .parallax-blob,
   .mesh-path,
   .blueprint-mesh {
     animation: none;
@@ -242,10 +380,50 @@ h6 {
   }
 }
 
+/* Testing override: keep decorative background motion active even when the OS requests reduced motion. */
+@media (prefers-reduced-motion: reduce) {
+  .mesh-path,
+  .blueprint-mesh,
+  .section-blob {
+    animation-duration: var(--duration, 12s) !important;
+    animation-iteration-count: infinite !important;
+    animation-timing-function: ease-in-out !important;
+  }
+
+  .mesh-path {
+    animation-name: meshPhase !important;
+    animation-delay: var(--delay, 0s) !important;
+  }
+
+  .blueprint-mesh {
+    animation-name: blueprintDrift !important;
+    animation-delay: var(--delay, 0s) !important;
+  }
+
+  .section-blob {
+    animation-name: sectionBlobFloat !important;
+    animation-delay: var(--delay, 0s) !important;
+  }
+}
+
 @media (max-width: 780px) {
   .blueprint-mesh {
     width: calc(var(--width) * 0.72);
     height: calc(var(--height) * 0.72);
     opacity: calc(var(--opacity) * 0.75);
+  }
+
+  .blueprint-guide {
+    top: 10px;
+  }
+
+  .section-blob {
+    width: calc(var(--size) * 1.02);
+    height: calc(var(--size) * 0.7);
+    filter: blur(14px);
+  }
+
+  .last-section-tail {
+    height: 96px;
   }
 }
