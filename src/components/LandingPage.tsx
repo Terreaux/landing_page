@@ -10,16 +10,16 @@ const serviceCards = [
     copy: 'Design and implementation of AI products mapped to business constraints and operational realities.'
   },
   {
-    title: 'Agenic Systems',
+    title: 'Agentic Systems',
     copy: 'Design and deployment of autonomous AI workflows that coordinate tools, data, and decisions in production.'
   },
   {
-    title: 'MLOps',
-    copy: 'Reliable pipelines for model training, deployment, monitoring, governance, and continuous iteration.'
+    title: 'Computer Vision',
+    copy: 'Vision systems for inspection, perception, and automation with production-ready data and model pipelines.'
   },
   {
-    title: 'LLMOps',
-    copy: 'Production LLM systems with evaluation loops, safety controls, prompt/version management, and observability.'
+    title: 'AI Platform Ops (MLOps + LLMOps)',
+    copy: 'Unified platform operations for model training, deployment, evaluation, monitoring, governance, and continuous iteration.'
   }
 ];
 
@@ -342,7 +342,7 @@ export function LandingPage() {
 
               <div className="ml-auto w-full max-w-[64ch] pb-[max(1.25rem,env(safe-area-inset-bottom))] text-right md:pb-8">
                 <p className="reveal ml-auto text-[clamp(1rem,1.5vw,1.24rem)] text-[#d4dec7]" data-reveal>
-                  Terreaux builds applied AI platforms, agenic systems, and production-grade MLOps/LLMOps architectures for teams that need outcomes, not prototypes.
+                  Terreaux builds applied AI systems, agentic systems, computer vision solutions, and production-grade AI platform ops for teams that need outcomes, not prototypes.
                 </p>
                 <div className="reveal mt-8 flex flex-wrap justify-end gap-3" data-reveal>
                   <Button asChild>
