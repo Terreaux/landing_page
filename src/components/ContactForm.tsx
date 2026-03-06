@@ -5,43 +5,54 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
 
-type SubmitState = 'idle' | 'submitting' | 'error';
+type SubmitState = 'idle' | 'submitting' | 'success' | 'error';
 
 export function ContactForm() {
   const [state, setState] = useState<SubmitState>('idle');
   const [errorMessage, setErrorMessage] = useState('');
+  const formspreeEndpoint = String(import.meta.env.PUBLIC_FORMSPREE_ENDPOINT ?? 'https://formspree.io/f/mojkqnbl').trim();
 
   const isSubmitting = state === 'submitting';
 
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+    if (!formspreeEndpoint) {
+      setState('error');
+      setErrorMessage('Feedback form is not configured yet. Please try again later.');
+      return;
+    }
+
     setState('submitting');
     setErrorMessage('');
 
     const formData = new FormData(event.currentTarget);
-    const payload = {
-      name: String(formData.get('name') ?? '').trim(),
-      email: String(formData.get('email') ?? '').trim(),
-      company: String(formData.get('company') ?? '').trim(),
-      message: String(formData.get('message') ?? '').trim()
-    };
 
     try {
-      const lines = [
-        `Name: ${payload.name}`,
-        `Email: ${payload.email}`,
-        `Company: ${payload.company || 'N/A'}`,
-        '',
-        'Message:',
-        payload.message
-      ];
-      const subject = encodeURIComponent(`New inquiry from ${payload.name}${payload.company ? ` (${payload.company})` : ''}`);
-      const body = encodeURIComponent(lines.join('\n'));
-      window.location.href = `mailto:hello@terreaux.co?subject=${subject}&body=${body}`;
-      setState('idle');
+      const response = await fetch(formspreeEndpoint, {
+        method: 'POST',
+        headers: {
+          Accept: 'application/json'
+        },
+        body: formData
+      });
+
+      if (!response.ok) {
+        let message = 'Unable to send feedback right now. Please try again.';
+
+        try {
+          const data = (await response.json()) as { errors?: Array<{ message?: string }> };
+          message = data.errors?.[0]?.message || message;
+        } catch {
+          // Ignore JSON parsing issues and keep the fallback message.
+        }
+
+        throw new Error(message);
+      }
+
+      setState('success');
       event.currentTarget.reset();
     } catch (error) {
-      const message = error instanceof Error ? error.message : 'Unable to open your email client right now.';
+      const message = error instanceof Error ? error.message : 'Unable to send feedback right now.';
       setState('error');
       setErrorMessage(message);
     }
@@ -81,6 +92,9 @@ export function ContactForm() {
         </Button>
       </div>
 
+      {state === 'success' ? (
+        <p className="text-sm text-[#d4f5d0]">Thanks. Your message has been sent.</p>
+      ) : null}
       {state === 'error' ? <p className="text-sm text-[#ffb2b2]">{errorMessage || 'Something went wrong. Please try again.'}</p> : null}
     </form>
   );
