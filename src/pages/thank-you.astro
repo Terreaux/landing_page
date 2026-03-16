@@ -1,5 +1,7 @@
 ---
 import BaseLayout from '@/layouts/BaseLayout.astro';
+
+const baseUrl = import.meta.env.BASE_URL;
 ---
 
 <BaseLayout
@@ -9,11 +11,11 @@ import BaseLayout from '@/layouts/BaseLayout.astro';
   <div class="site-bg" aria-hidden="true"></div>
 
   <header class="sticky top-0 z-20 flex items-center justify-between gap-5 border-b-2 border-[#d1e4b033] bg-black/60 px-[5vw] py-5 backdrop-blur-md">
-    <a href="/" class="font-display text-base font-extrabold tracking-[0.09em] text-[#f7f9f2] no-underline">TERREAUX</a>
+    <a href={baseUrl} class="font-display text-base font-extrabold tracking-[0.09em] text-[#f7f9f2] no-underline">TERREAUX</a>
     <nav class="hidden gap-5 text-sm text-[#b6bfab] md:flex">
-      <a href="/#services" class="transition-colors hover:text-[#f7f9f2]">Services</a>
-      <a href="/#approach" class="transition-colors hover:text-[#f7f9f2]">Approach</a>
-      <a href="/contact" class="transition-colors hover:text-[#f7f9f2]">Contact</a>
+      <a href={`${baseUrl}#services`} class="transition-colors hover:text-[#f7f9f2]">Services</a>
+      <a href={`${baseUrl}#approach`} class="transition-colors hover:text-[#f7f9f2]">Approach</a>
+      <a href={`${baseUrl}contact/`} class="transition-colors hover:text-[#f7f9f2]">Contact</a>
     </nav>
   </header>
 
@@ -44,13 +46,13 @@ import BaseLayout from '@/layouts/BaseLayout.astro';
 
       <div class="mt-8 flex flex-wrap gap-3">
         <a
-          href="/"
+          href={baseUrl}
           class="inline-flex items-center justify-center rounded-full border border-[#c3e8b1] px-5 py-3 font-display text-sm tracking-[0.08em] text-[#f7f9f2] no-underline transition-colors hover:bg-[#c3e8b1] hover:text-[#0b100a]"
         >
           Back Home
         </a>
         <a
-          href="/contact"
+          href={`${baseUrl}contact/`}
           class="inline-flex items-center justify-center rounded-full border border-[#d1e4b033] px-5 py-3 font-display text-sm tracking-[0.08em] text-[#d0d9c3] no-underline transition-colors hover:border-[#c3e8b1] hover:text-[#f7f9f2]"
         >
           Send Another Message
