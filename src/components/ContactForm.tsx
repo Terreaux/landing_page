@@ -11,7 +11,8 @@ export function ContactForm() {
   const [state, setState] = useState<SubmitState>('idle');
   const [errorMessage, setErrorMessage] = useState('');
   const formspreeEndpoint = String(import.meta.env.PUBLIC_FORMSPREE_ENDPOINT ?? 'https://formspree.io/f/mojkqnbl').trim();
-  const thankYouPath = `${import.meta.env.BASE_URL}thank-you/`;
+  const rootPath = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL : `${import.meta.env.BASE_URL}/`;
+  const thankYouPath = `${rootPath}thank-you/`;
 
   const isSubmitting = state === 'submitting';
 
