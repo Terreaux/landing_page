@@ -11,11 +11,14 @@ export function ContactForm() {
   const [state, setState] = useState<SubmitState>('idle');
   const [errorMessage, setErrorMessage] = useState('');
   const formspreeEndpoint = String(import.meta.env.PUBLIC_FORMSPREE_ENDPOINT ?? 'https://formspree.io/f/mojkqnbl').trim();
+  const thankYouPath = `${import.meta.env.BASE_URL}thank-you/`;
 
   const isSubmitting = state === 'submitting';
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+    const form = event.currentTarget;
+
     if (!formspreeEndpoint) {
       setState('error');
       setErrorMessage('Feedback form is not configured yet. Please try again later.');
@@ -25,7 +28,7 @@ export function ContactForm() {
     setState('submitting');
     setErrorMessage('');
 
-    const formData = new FormData(event.currentTarget);
+    const formData = new FormData(form);
 
     try {
       const response = await fetch(formspreeEndpoint, {
@@ -50,7 +53,8 @@ export function ContactForm() {
       }
 
       setState('success');
-      event.currentTarget.reset();
+      form.reset();
+      window.location.assign(thankYouPath);
     } catch (error) {
       const message = error instanceof Error ? error.message : 'Unable to send feedback right now.';
       setState('error');
@@ -60,6 +64,7 @@ export function ContactForm() {
 
   return (
     <form className="space-y-4" method="POST" action={formspreeEndpoint} onSubmit={handleSubmit}>
+      <input type="hidden" name="_next" value={thankYouPath} />
       <div className="grid gap-4 sm:grid-cols-2">
         <div className="space-y-2">
           <Label htmlFor="name">Name</Label>
