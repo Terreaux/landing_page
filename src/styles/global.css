@@ -49,6 +49,117 @@ h6 {
   text-shadow: 0 0 24px rgba(103, 186, 133, 0.18);
 }
 
+.hero-headline {
+  max-width: 9ch;
+}
+
+.hero-proof-column {
+  display: grid;
+  gap: 1.75rem;
+  align-self: end;
+  justify-items: start;
+}
+
+.hero-workflow-shell {
+  width: min(100%, 32rem);
+}
+
+.hero-workflow {
+  position: relative;
+  min-height: 23rem;
+  border: 1px solid rgba(162, 191, 168, 0.14);
+  background:
+    radial-gradient(circle at 50% 50%, rgba(90, 158, 112, 0.12), transparent 34%),
+    linear-gradient(180deg, rgba(11, 15, 11, 0.92), rgba(6, 8, 6, 0.78));
+  box-shadow:
+    inset 0 0 0 1px rgba(208, 231, 198, 0.04),
+    0 18px 40px rgba(0, 0, 0, 0.2);
+  overflow: hidden;
+}
+
+.hero-workflow::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(138, 168, 142, 0.08) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(138, 168, 142, 0.08) 1px, transparent 1px);
+  background-size: 3.9rem 3.9rem;
+  mask-image: linear-gradient(180deg, rgba(0, 0, 0, 0.72), transparent 100%);
+  pointer-events: none;
+}
+
+.hero-workflow-lines {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.hero-workflow-line {
+  stroke: rgba(214, 231, 220, 0.3);
+  stroke-width: 0.55;
+  stroke-linecap: round;
+}
+
+.hero-workflow-node {
+  position: absolute;
+  left: var(--x);
+  top: var(--y);
+  display: inline-flex;
+  min-width: 7.8rem;
+  align-items: center;
+  gap: 0.7rem;
+  transform: translate(-50%, -50%);
+  padding: 0.72rem 0.92rem;
+  border: 1px solid rgba(177, 196, 182, 0.16);
+  background: rgba(9, 13, 10, 0.78);
+  backdrop-filter: blur(10px);
+}
+
+.hero-workflow-node-dot {
+  width: 0.56rem;
+  height: 0.56rem;
+  flex: none;
+  border-radius: 999px;
+  border: 1px solid rgba(215, 234, 221, 0.5);
+  background: rgba(211, 229, 217, 0.18);
+}
+
+.hero-workflow-node-label {
+  font-size: 0.72rem;
+  line-height: 1.2;
+  letter-spacing: 0.11em;
+  text-transform: uppercase;
+  color: rgba(232, 241, 233, 0.88);
+}
+
+.hero-workflow-node-source,
+.hero-workflow-node-outcome {
+  min-width: 7.2rem;
+}
+
+.hero-workflow-node-source .hero-workflow-node-dot,
+.hero-workflow-node-outcome .hero-workflow-node-dot {
+  box-shadow: 0 0 0 0 rgba(152, 242, 190, 0);
+}
+
+.hero-workflow-node-core {
+  min-width: 8.8rem;
+  border-color: rgba(152, 242, 190, 0.28);
+  background:
+    radial-gradient(circle at 30% 30%, rgba(152, 242, 190, 0.18), transparent 58%),
+    rgba(9, 13, 10, 0.92);
+  box-shadow:
+    inset 0 0 0 1px rgba(152, 242, 190, 0.08),
+    0 0 34px rgba(74, 136, 97, 0.18);
+}
+
+.hero-workflow-node-core .hero-workflow-node-dot {
+  background: #98f2be;
+  border-color: rgba(152, 242, 190, 0.92);
+}
+
 .blueprint-cross {
   position: absolute;
   bottom: -1px;

@@ -41,6 +41,25 @@ const timelineItems = [
   }
 ];
 
+const heroWorkflowNodes = [
+  { key: 'source-data', label: 'Data', variant: 'source', x: '14%', y: '20%' },
+  { key: 'source-systems', label: 'Systems', variant: 'source', x: '12%', y: '50%' },
+  { key: 'source-teams', label: 'Teams', variant: 'source', x: '16%', y: '80%' },
+  { key: 'core-terreaux', label: 'Terreaux', variant: 'core', x: '50%', y: '50%' },
+  { key: 'outcome-ai', label: 'AI Systems', variant: 'outcome', x: '84%', y: '22%' },
+  { key: 'outcome-workflows', label: 'Agentic Ops', variant: 'outcome', x: '88%', y: '50%' },
+  { key: 'outcome-vision', label: 'Vision Ops', variant: 'outcome', x: '82%', y: '78%' }
+] as const;
+
+const heroWorkflowLinks = [
+  { key: 'link-data', x1: 18, y1: 22, x2: 44, y2: 43 },
+  { key: 'link-systems', x1: 17, y1: 50, x2: 42, y2: 50 },
+  { key: 'link-teams', x1: 20, y1: 78, x2: 44, y2: 57 },
+  { key: 'link-ai', x1: 56, y1: 44, x2: 79, y2: 24 },
+  { key: 'link-workflows', x1: 58, y1: 50, x2: 83, y2: 50 },
+  { key: 'link-vision', x1: 56, y1: 56, x2: 77, y2: 76 }
+] as const;
+
 const manifoldLayers = [
   { x: '-8%', y: '7%', width: '120%', height: '20rem', speed: 0.03, rotate: '-4deg', opacity: 0.26 },
   { x: '-3%', y: '19%', width: '114%', height: '16rem', speed: -0.04, rotate: '3deg', opacity: 0.2 },
@@ -342,6 +361,32 @@ export function LandingPage() {
               </div>
 
               <div className="hero-proof-column w-full pb-[max(1.25rem,env(safe-area-inset-bottom))] lg:pb-8">
+                <div className="reveal hero-workflow-shell" data-reveal>
+                  <div className="hero-workflow" aria-hidden="true">
+                    <svg className="hero-workflow-lines" viewBox="0 0 100 100" preserveAspectRatio="none">
+                      {heroWorkflowLinks.map((link) => (
+                        <line
+                          key={link.key}
+                          className="hero-workflow-line"
+                          x1={link.x1}
+                          y1={link.y1}
+                          x2={link.x2}
+                          y2={link.y2}
+                        />
+                      ))}
+                    </svg>
+                    {heroWorkflowNodes.map((node) => (
+                      <div
+                        key={node.key}
+                        className={`hero-workflow-node hero-workflow-node-${node.variant}`}
+                        style={{ '--x': node.x, '--y': node.y } as CSSProperties}
+                      >
+                        <span className="hero-workflow-node-dot" />
+                        <span className="hero-workflow-node-label">{node.label}</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
                 <p className="reveal max-w-[34rem] text-balance text-[clamp(1rem,1.35vw,1.14rem)] leading-[1.7] text-[#d4dec7]" data-reveal>
                   Terreaux builds applied AI systems, agentic systems, computer vision solutions, and production-grade AI platform ops for teams that need outcomes, not prototypes.
                 </p>
