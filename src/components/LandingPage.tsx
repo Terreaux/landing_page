@@ -367,7 +367,7 @@ export function LandingPage() {
                       {heroWorkflowLinks.map((link) => (
                         <line
                           key={link.key}
-                          className="hero-workflow-line"
+                          className={`hero-workflow-line hero-workflow-line-${link.key}`}
                           x1={link.x1}
                           y1={link.y1}
                           x2={link.x2}
@@ -378,7 +378,7 @@ export function LandingPage() {
                     {heroWorkflowNodes.map((node) => (
                       <div
                         key={node.key}
-                        className={`hero-workflow-node hero-workflow-node-${node.variant}`}
+                        className={`hero-workflow-node hero-workflow-node-${node.variant} hero-workflow-node-${node.key}`}
                         style={{ '--x': node.x, '--y': node.y } as CSSProperties}
                       >
                         <span className="hero-workflow-node-dot" />
