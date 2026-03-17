@@ -30,9 +30,9 @@ h6 {
   inset: 0;
   z-index: -4;
   background:
-    radial-gradient(circle at 14% 10%, rgba(145, 209, 150, 0.14), transparent 42%),
-    radial-gradient(circle at 81% 18%, rgba(180, 218, 157, 0.12), transparent 40%),
-    radial-gradient(circle at 50% 90%, rgba(255, 241, 201, 0.05), transparent 55%),
+    radial-gradient(circle at 16% 12%, rgba(138, 212, 162, 0.12), transparent 34%),
+    radial-gradient(circle at 82% 18%, rgba(152, 188, 164, 0.06), transparent 30%),
+    radial-gradient(circle at 50% 90%, rgba(255, 241, 201, 0.03), transparent 48%),
     linear-gradient(165deg, #050605 0%, #0a0d09 52%, #070905 100%);
 }
 
@@ -45,12 +45,8 @@ h6 {
 }
 
 .gradient-text {
-  background-image: linear-gradient(105deg, #85e7ae, #b7ffdb, #d0de9f, #85e7ae);
-  background-size: 260% 260%;
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-  animation: gradientShift 9s ease-in-out infinite;
+  color: #98f2be;
+  text-shadow: 0 0 24px rgba(103, 186, 133, 0.18);
 }
 
 .blueprint-cross {
@@ -261,8 +257,8 @@ h6 {
     radial-gradient(circle at 30% 30%, hsla(var(--hue), 64%, 74%, calc(var(--alpha) * 1.45)), transparent 58%),
     radial-gradient(circle at 72% 62%, hsla(calc(var(--hue) - 18), 58%, 56%, var(--alpha)), transparent 66%),
     radial-gradient(circle at 52% 52%, rgba(191, 240, 218, 0.18), transparent 74%);
-  filter: blur(18px);
-  opacity: 0.9;
+  filter: blur(14px);
+  opacity: 0.72;
   animation:
     sectionBlobFloat var(--duration, 10.5s) ease-in-out infinite alternate,
     sectionBlobPulse 3.2s ease-in-out infinite;
@@ -357,6 +353,7 @@ h6 {
   transform: translate3d(0, calc(var(--parallax-scroll) * var(--speed)), 0) rotate(var(--rotate));
   will-change: transform;
   filter: blur(0.2px);
+  opacity: 0.42;
 }
 
 .blueprint-mesh {
@@ -365,12 +362,13 @@ h6 {
   top: var(--y);
   width: var(--width);
   height: var(--height);
-  opacity: var(--opacity);
+  opacity: calc(var(--opacity) * 0.42);
   transform: translate3d(0, calc(var(--parallax-scroll) * var(--speed)), 0) rotate(var(--rotate));
   animation: blueprintDrift 18s ease-in-out infinite alternate;
   animation-delay: var(--delay);
   mix-blend-mode: screen;
   will-change: transform;
+  mask-image: radial-gradient(circle at 50% 50%, rgba(0, 0, 0, 0.3) 0%, black 22%, transparent 72%);
 }
 
 .blueprint-mesh svg {
@@ -401,8 +399,8 @@ h6 {
   inset: 2% 4% 6% 4%;
   width: calc(100% - 8%);
   height: calc(100% - 8%);
-  mask-image: radial-gradient(ellipse at 52% 50%, black 42%, transparent 92%);
-  opacity: 0.8;
+  mask-image: radial-gradient(ellipse at 46% 56%, black 34%, transparent 78%);
+  opacity: 0.32;
 }
 
 .mesh-path {
@@ -410,7 +408,7 @@ h6 {
   stroke: #2f3f4b;
   stroke-width: var(--stroke);
   stroke-linecap: round;
-  opacity: var(--opacity);
+  opacity: calc(var(--opacity) * 0.48);
   transform: translate3d(calc(var(--phase) * -1), var(--offset), 0);
   animation: meshPhase var(--duration) ease-in-out infinite;
   animation-delay: var(--delay);
