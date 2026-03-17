@@ -328,23 +328,24 @@ export function LandingPage() {
                 ))}
               </svg>
             </div>
-            <span className="section-blob" style={{ '--x': '26%', '--y': '26%', '--size': '30rem', '--hue': '154', '--alpha': '0.26', '--drift-x': '122px', '--drift-y': '-58px', '--duration': '11.2s', '--delay': '-2.4s' } as CSSProperties} aria-hidden="true" />
-            <span className="section-blob" style={{ '--x': '84%', '--y': '70%', '--size': '34rem', '--hue': '168', '--alpha': '0.24', '--drift-x': '-110px', '--drift-y': '62px', '--duration': '12.1s', '--delay': '-5.1s' } as CSSProperties} aria-hidden="true" />
-            <div className="relative z-10 mx-auto flex min-h-[calc(88vh-10rem)] w-[min(1200px,92vw)] flex-col justify-between gap-10">
-              <div className="w-full max-w-[860px] pt-[8vh] md:pt-[12vh]">
+            <span className="section-blob" style={{ '--x': '24%', '--y': '27%', '--size': '25rem', '--hue': '154', '--alpha': '0.22', '--drift-x': '68px', '--drift-y': '-28px', '--duration': '18s', '--delay': '-2.4s' } as CSSProperties} aria-hidden="true" />
+            <div className="relative z-10 mx-auto grid min-h-[calc(88vh-10rem)] w-[min(1200px,92vw)] gap-12 py-[max(2rem,6vh)] lg:grid-cols-[minmax(0,0.95fr)_minmax(20rem,0.82fr)] lg:items-center lg:gap-14">
+              <div className="max-w-[42rem] self-start pt-[8vh] md:pt-[12vh] lg:pt-[8vh]">
                 <p className="eyebrow hero-eyebrow reveal" data-reveal>
                   Consulting + Contracting Studio
                 </p>
-                <h1 className="reveal font-display text-[clamp(1.8rem,4.8vw,4.6rem)] font-extrabold leading-[1.05] tracking-[0.09em]" data-reveal>
-                  Applied Intelligence, <span className="gradient-text">Built for Real-World</span> Delivery.
+                <h1 className="reveal hero-headline font-display text-[clamp(2.4rem,5.2vw,5.4rem)] font-extrabold leading-[0.98] tracking-[0.06em]" data-reveal>
+                  Applied Intelligence,
+                  <br />
+                  Built for <span className="gradient-text">Real-World Delivery.</span>
                 </h1>
               </div>
 
-              <div className="ml-auto w-full max-w-[64ch] pb-[max(1.25rem,env(safe-area-inset-bottom))] text-right md:pb-8">
-                <p className="reveal ml-auto text-[clamp(1rem,1.5vw,1.24rem)] text-[#d4dec7]" data-reveal>
+              <div className="hero-proof-column w-full pb-[max(1.25rem,env(safe-area-inset-bottom))] lg:pb-8">
+                <p className="reveal max-w-[34rem] text-balance text-[clamp(1rem,1.35vw,1.14rem)] leading-[1.7] text-[#d4dec7]" data-reveal>
                   Terreaux builds applied AI systems, agentic systems, computer vision solutions, and production-grade AI platform ops for teams that need outcomes, not prototypes.
                 </p>
-                <div className="reveal mt-8 flex flex-wrap justify-end gap-3" data-reveal>
+                <div className="reveal mt-8 flex flex-wrap gap-3" data-reveal>
                   <Button asChild>
                     <a href="#contact">Book Discovery Call</a>
                   </Button>
