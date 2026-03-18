@@ -1,63 +1,51 @@
 ---
-import BaseLayout from '@/layouts/BaseLayout.astro';
+import SiteLayout from '@/layouts/SiteLayout.astro';
+import { getRootPath } from '@/lib/utils';
 
-const rootPath = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL : `${import.meta.env.BASE_URL}/`;
+const rootPath = getRootPath();
 ---
 
-<BaseLayout
+<SiteLayout
   title="Thank You | Terreaux"
   description="Thanks for contacting Terreaux. We will follow up shortly with next steps."
 >
-  <div class="site-bg" aria-hidden="true"></div>
+  <section class="rounded-3xl border border-[#bcd69f59] bg-[linear-gradient(175deg,rgba(16,21,14,0.95),rgba(8,10,7,0.99))] p-[clamp(1.2rem,3vw,2.2rem)]">
+    <p class="eyebrow">Thank You</p>
+    <h1 class="max-w-[16ch] font-display text-[clamp(2rem,5vw,4.2rem)] leading-[1.04] text-[#f7f9f2]">
+      Your message is in.
+    </h1>
+    <p class="mt-4 max-w-[60ch] text-[#d0d9c3]">
+      We will review your note and follow up with practical next steps. If your request is time-sensitive, contact us directly and include your timeline.
+    </p>
 
-  <header class="sticky top-0 z-20 flex items-center justify-between gap-5 border-b-2 border-[#d1e4b033] bg-black/60 px-[5vw] py-5 backdrop-blur-md">
-    <a href={rootPath} class="font-display text-base font-extrabold tracking-[0.09em] text-[#f7f9f2] no-underline">TERREAUX</a>
-    <nav class="hidden gap-5 text-sm text-[#b6bfab] md:flex">
-      <a href={`${rootPath}#services`} class="transition-colors hover:text-[#f7f9f2]">Services</a>
-      <a href={`${rootPath}#approach`} class="transition-colors hover:text-[#f7f9f2]">Approach</a>
-      <a href={`${rootPath}contact/`} class="transition-colors hover:text-[#f7f9f2]">Contact</a>
-    </nav>
-  </header>
-
-  <main class="mx-auto w-[min(980px,92vw)] py-16 md:py-24">
-    <section class="rounded-3xl border border-[#bcd69f59] bg-[linear-gradient(175deg,rgba(16,21,14,0.95),rgba(8,10,7,0.99))] p-[clamp(1.2rem,3vw,2.2rem)]">
-      <p class="eyebrow">Thank You</p>
-      <h1 class="max-w-[16ch] font-display text-[clamp(2rem,5vw,4.2rem)] leading-[1.04] text-[#f7f9f2]">
-        Your message is in.
-      </h1>
-      <p class="mt-4 max-w-[60ch] text-[#d0d9c3]">
-        We will review your note and follow up with practical next steps. If your request is time-sensitive, contact us directly and include your timeline.
-      </p>
-
-      <div class="mt-8 grid gap-4 md:grid-cols-2">
-        <div class="rounded-2xl border border-[#bcd69f40] bg-black/20 p-6">
-          <p class="font-display text-lg text-[#f7f9f2]">Email</p>
-          <a href="mailto:hello@terreaux.co" class="mt-3 inline-block text-[#c3e8b1] no-underline transition-colors hover:text-[#f7f9f2]">
-            hello@terreaux.co
-          </a>
-        </div>
-        <div class="rounded-2xl border border-[#bcd69f40] bg-black/20 p-6">
-          <p class="font-display text-lg text-[#f7f9f2]">Next Step</p>
-          <p class="mt-3 text-[#d0d9c3]">
-            Expect a reply with scope alignment, delivery approach, and recommended timing.
-          </p>
-        </div>
-      </div>
-
-      <div class="mt-8 flex flex-wrap gap-3">
-        <a
-          href={rootPath}
-          class="inline-flex items-center justify-center rounded-full border border-[#c3e8b1] px-5 py-3 font-display text-sm tracking-[0.08em] text-[#f7f9f2] no-underline transition-colors hover:bg-[#c3e8b1] hover:text-[#0b100a]"
-        >
-          Back Home
-        </a>
-        <a
-          href={`${rootPath}contact/`}
-          class="inline-flex items-center justify-center rounded-full border border-[#d1e4b033] px-5 py-3 font-display text-sm tracking-[0.08em] text-[#d0d9c3] no-underline transition-colors hover:border-[#c3e8b1] hover:text-[#f7f9f2]"
-        >
-          Send Another Message
+    <div class="mt-8 grid gap-4 md:grid-cols-2">
+      <div class="rounded-2xl border border-[#bcd69f40] bg-black/20 p-6">
+        <p class="font-display text-lg text-[#f7f9f2]">Email</p>
+        <a href="mailto:hello@terreaux.co" class="mt-3 inline-block text-[#c3e8b1] no-underline transition-colors hover:text-[#f7f9f2]">
+          hello@terreaux.co
         </a>
       </div>
-    </section>
-  </main>
-</BaseLayout>
+      <div class="rounded-2xl border border-[#bcd69f40] bg-black/20 p-6">
+        <p class="font-display text-lg text-[#f7f9f2]">Next Step</p>
+        <p class="mt-3 text-[#d0d9c3]">
+          Expect a reply with scope alignment, delivery approach, and recommended timing.
+        </p>
+      </div>
+    </div>
+
+    <div class="mt-8 flex flex-wrap gap-3">
+      <a
+        href={rootPath}
+        class="inline-flex items-center justify-center rounded-full border border-[#c3e8b1] px-5 py-3 font-display text-sm tracking-[0.08em] text-[#f7f9f2] no-underline transition-colors hover:bg-[#c3e8b1] hover:text-[#0b100a]"
+      >
+        Back Home
+      </a>
+      <a
+        href={`${rootPath}contact/`}
+        class="inline-flex items-center justify-center rounded-full border border-[#d1e4b033] px-5 py-3 font-display text-sm tracking-[0.08em] text-[#d0d9c3] no-underline transition-colors hover:border-[#c3e8b1] hover:text-[#f7f9f2]"
+      >
+        Send Another Message
+      </a>
+    </div>
+  </section>
+</SiteLayout>

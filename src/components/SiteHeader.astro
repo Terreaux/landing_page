@@ -1,0 +1,22 @@
+---
+import { getRootPath } from '@/lib/utils';
+
+interface Props {
+  activePage?: 'services' | 'approach' | 'contact';
+}
+
+const { activePage } = Astro.props;
+const rootPath = getRootPath();
+
+const linkClass = (page: 'services' | 'approach' | 'contact') =>
+  page === activePage ? 'text-[#f7f9f2]' : 'transition-colors hover:text-[#f7f9f2]';
+---
+
+<header class="sticky top-0 z-20 flex items-center justify-between gap-5 border-b-2 border-[#d1e4b033] bg-black/60 px-[5vw] py-5 backdrop-blur-md">
+  <a href={rootPath} class="font-display text-base font-extrabold tracking-[0.09em] text-[#f7f9f2] no-underline">TERREAUX</a>
+  <nav class="hidden gap-5 text-sm text-[#b6bfab] md:flex">
+    <a href={`${rootPath}#services`} class={linkClass('services')}>Services</a>
+    <a href={`${rootPath}#approach`} class={linkClass('approach')}>Approach</a>
+    <a href={`${rootPath}contact/`} class={linkClass('contact')}>Contact</a>
+  </nav>
+</header>

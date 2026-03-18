@@ -1,0 +1,22 @@
+---
+import SiteHeader from '@/components/SiteHeader.astro';
+import BaseLayout from '@/layouts/BaseLayout.astro';
+
+interface Props {
+  title?: string;
+  description?: string;
+  activePage?: 'services' | 'approach' | 'contact';
+}
+
+const { title, description, activePage } = Astro.props;
+---
+
+<BaseLayout title={title} description={description}>
+  <div class="site-bg" aria-hidden="true" />
+
+  <SiteHeader activePage={activePage} />
+
+  <main class="mx-auto w-[min(980px,92vw)] py-16 md:py-24">
+    <slot />
+  </main>
+</BaseLayout>
