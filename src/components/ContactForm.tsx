@@ -12,7 +12,7 @@ export function ContactForm() {
   const [state, setState] = useState<SubmitState>('idle');
   const [errorMessage, setErrorMessage] = useState('');
   const formspreeEndpoint = String(import.meta.env.PUBLIC_FORMSPREE_ENDPOINT ?? 'https://formspree.io/f/mojkqnbl').trim();
-  const thankYouPath = `${getRootPath()}thank-you/`;
+  const thankYouPath = `${getRootPath()}thank-you/?from=contact`;
 
   const isSubmitting = state === 'submitting';
 
