@@ -68,7 +68,7 @@ export function ContactForm() {
 
   return (
     <form className="space-y-4" method="POST" action={formspreeEndpoint} onSubmit={handleSubmit}>
-      <input type="hidden" name="_next" value={thankYouPath} />
+      <input type="hidden" name="_next" value={`${getRootPath()}thank-you/?from=contact`} />
       <div className="grid gap-4 sm:grid-cols-2">
         <div className="space-y-2">
           <Label htmlFor="name">Name</Label>
