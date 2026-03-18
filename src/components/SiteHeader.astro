@@ -2,13 +2,13 @@
 import { getRootPath } from '@/lib/utils';
 
 interface Props {
-  activePage?: 'services' | 'approach' | 'contact';
+  activePage?: 'services' | 'approach' | 'contact' | 'schedule';
 }
 
 const { activePage } = Astro.props;
 const rootPath = getRootPath();
 
-const linkClass = (page: 'services' | 'approach' | 'contact') =>
+const linkClass = (page: 'services' | 'approach' | 'contact' | 'schedule') =>
   page === activePage ? 'text-[#f7f9f2]' : 'transition-colors hover:text-[#f7f9f2]';
 ---
 
@@ -18,5 +18,6 @@ const linkClass = (page: 'services' | 'approach' | 'contact') =>
     <a href={`${rootPath}#services`} class={linkClass('services')}>Services</a>
     <a href={`${rootPath}#approach`} class={linkClass('approach')}>Approach</a>
     <a href={`${rootPath}contact/`} class={linkClass('contact')}>Contact</a>
+    <a href={`${rootPath}schedule/`} class={linkClass('schedule')}>Schedule</a>
   </nav>
 </header>
