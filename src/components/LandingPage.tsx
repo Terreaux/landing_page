@@ -41,8 +41,14 @@ export function LandingPage() {
       const leftRect = leftCross.getBoundingClientRect();
       const rightRect = rightCross.getBoundingClientRect();
 
-      document.documentElement.style.setProperty('--blueprint-guide-left-x', `${leftRect.left + leftRect.width / 2 - layerRect.left}px`);
-      document.documentElement.style.setProperty('--blueprint-guide-right-x', `${rightRect.left + rightRect.width / 2 - layerRect.left}px`);
+      document.documentElement.style.setProperty(
+        '--blueprint-guide-left-x',
+        `${leftRect.left + leftRect.width / 2 - layerRect.left}px`
+      );
+      document.documentElement.style.setProperty(
+        '--blueprint-guide-right-x',
+        `${rightRect.left + rightRect.width / 2 - layerRect.left}px`
+      );
       if (!guidesVisible) {
         document.documentElement.style.setProperty('--blueprint-guides-opacity', '1');
         guidesVisible = true;
@@ -93,19 +99,10 @@ export function LandingPage() {
       runGuideSyncWindow(900);
     });
 
-    const headerEl = document.querySelector<HTMLElement>('header[data-reveal]');
-    const handleHeaderTransitionStart = () => runGuideSyncWindow(1200);
-    const handleHeaderTransitionEnd = () => syncGuidesAfterLayout();
-    headerEl?.addEventListener('transitionstart', handleHeaderTransitionStart);
-    headerEl?.addEventListener('transitionend', handleHeaderTransitionEnd);
-
     return () => {
-      observer.disconnect();
       window.removeEventListener('scroll', handleScroll);
       window.removeEventListener('resize', handleScroll);
       window.removeEventListener('load', syncGuidesAfterLayout);
-      headerEl?.removeEventListener('transitionstart', handleHeaderTransitionStart);
-      headerEl?.removeEventListener('transitionend', handleHeaderTransitionEnd);
       if (rafId !== 0) {
         window.cancelAnimationFrame(rafId);
       }
