@@ -30,9 +30,9 @@ h6 {
   inset: 0;
   z-index: -4;
   background:
-    radial-gradient(circle at 14% 10%, rgba(145, 209, 150, 0.14), transparent 42%),
-    radial-gradient(circle at 81% 18%, rgba(180, 218, 157, 0.12), transparent 40%),
-    radial-gradient(circle at 50% 90%, rgba(255, 241, 201, 0.05), transparent 55%),
+    radial-gradient(circle at 16% 12%, rgba(138, 212, 162, 0.12), transparent 34%),
+    radial-gradient(circle at 82% 18%, rgba(152, 188, 164, 0.06), transparent 30%),
+    radial-gradient(circle at 50% 90%, rgba(255, 241, 201, 0.03), transparent 48%),
     linear-gradient(165deg, #050605 0%, #0a0d09 52%, #070905 100%);
 }
 
@@ -45,12 +45,178 @@ h6 {
 }
 
 .gradient-text {
-  background-image: linear-gradient(105deg, #85e7ae, #b7ffdb, #d0de9f, #85e7ae);
-  background-size: 260% 260%;
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-  animation: gradientShift 9s ease-in-out infinite;
+  color: #98f2be;
+  text-shadow: 0 0 24px rgba(103, 186, 133, 0.18);
+}
+
+.hero-headline {
+  max-width: 9ch;
+}
+
+.hero-proof-column {
+  display: grid;
+  gap: 1.75rem;
+  align-self: end;
+  justify-items: start;
+}
+
+.hero-workflow-shell {
+  width: min(100%, 32rem);
+}
+
+.hero-workflow {
+  position: relative;
+  min-height: 23rem;
+  border: 1px solid rgba(162, 191, 168, 0.14);
+  background:
+    radial-gradient(circle at 50% 50%, rgba(90, 158, 112, 0.12), transparent 34%),
+    linear-gradient(180deg, rgba(11, 15, 11, 0.92), rgba(6, 8, 6, 0.78));
+  box-shadow:
+    inset 0 0 0 1px rgba(208, 231, 198, 0.04),
+    0 18px 40px rgba(0, 0, 0, 0.2);
+  overflow: hidden;
+}
+
+.hero-workflow::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(138, 168, 142, 0.08) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(138, 168, 142, 0.08) 1px, transparent 1px);
+  background-size: 3.9rem 3.9rem;
+  mask-image: linear-gradient(180deg, rgba(0, 0, 0, 0.72), transparent 100%);
+  pointer-events: none;
+}
+
+.hero-workflow-lines {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.hero-workflow-line {
+  stroke: rgba(214, 231, 220, 0.3);
+  stroke-width: 0.55;
+  stroke-linecap: round;
+  stroke-dasharray: 2 4;
+  animation: workflowPulse 3.4s ease-in-out infinite;
+}
+
+.hero-workflow-line-link-data {
+  animation-delay: -0.2s;
+}
+
+.hero-workflow-line-link-systems {
+  animation-delay: -0.9s;
+}
+
+.hero-workflow-line-link-teams {
+  animation-delay: -1.4s;
+}
+
+.hero-workflow-line-link-ai {
+  animation-delay: -1.1s;
+}
+
+.hero-workflow-line-link-workflows {
+  animation-delay: -1.8s;
+}
+
+.hero-workflow-line-link-vision {
+  animation-delay: -2.4s;
+}
+
+.hero-workflow-node {
+  position: absolute;
+  left: var(--x);
+  top: var(--y);
+  display: inline-flex;
+  min-width: 7.8rem;
+  align-items: center;
+  gap: 0.7rem;
+  transform: translate(-50%, -50%);
+  padding: 0.72rem 0.92rem;
+  border: 1px solid rgba(177, 196, 182, 0.16);
+  background: rgba(9, 13, 10, 0.78);
+  backdrop-filter: blur(10px);
+}
+
+.hero-workflow-node-dot {
+  width: 0.56rem;
+  height: 0.56rem;
+  flex: none;
+  border-radius: 999px;
+  border: 1px solid rgba(215, 234, 221, 0.5);
+  background: rgba(211, 229, 217, 0.18);
+  transition:
+    background-color 240ms ease,
+    border-color 240ms ease,
+    box-shadow 240ms ease;
+}
+
+.hero-workflow-node-label {
+  font-size: 0.72rem;
+  line-height: 1.2;
+  letter-spacing: 0.11em;
+  text-transform: uppercase;
+  color: rgba(232, 241, 233, 0.88);
+}
+
+.hero-workflow-node-source,
+.hero-workflow-node-outcome {
+  min-width: 7.2rem;
+}
+
+.hero-workflow-node-source .hero-workflow-node-dot,
+.hero-workflow-node-outcome .hero-workflow-node-dot {
+  box-shadow: 0 0 0 0 rgba(152, 242, 190, 0);
+}
+
+.hero-workflow-node-core {
+  min-width: 8.8rem;
+  border-color: rgba(152, 242, 190, 0.28);
+  background:
+    radial-gradient(circle at 30% 30%, rgba(152, 242, 190, 0.18), transparent 58%),
+    rgba(9, 13, 10, 0.92);
+  box-shadow:
+    inset 0 0 0 1px rgba(152, 242, 190, 0.08),
+    0 0 34px rgba(74, 136, 97, 0.18);
+}
+
+.hero-workflow-node-core .hero-workflow-node-dot {
+  background: #98f2be;
+  border-color: rgba(152, 242, 190, 0.92);
+  animation: workflowCorePulse 3.8s ease-in-out infinite;
+}
+
+.hero-workflow:hover .hero-workflow-node-dot {
+  box-shadow: 0 0 0 0.18rem rgba(152, 242, 190, 0.08);
+}
+
+@keyframes workflowPulse {
+  0%,
+  100% {
+    stroke: rgba(214, 231, 220, 0.22);
+    stroke-dashoffset: 0;
+  }
+  50% {
+    stroke: rgba(152, 242, 190, 0.56);
+    stroke-dashoffset: -8;
+  }
+}
+
+@keyframes workflowCorePulse {
+  0%,
+  100% {
+    box-shadow: 0 0 0 0 rgba(152, 242, 190, 0.12);
+    transform: scale(1);
+  }
+  50% {
+    box-shadow: 0 0 0 0.3rem rgba(152, 242, 190, 0.12);
+    transform: scale(1.06);
+  }
 }
 
 .blueprint-cross {
@@ -261,8 +427,8 @@ h6 {
     radial-gradient(circle at 30% 30%, hsla(var(--hue), 64%, 74%, calc(var(--alpha) * 1.45)), transparent 58%),
     radial-gradient(circle at 72% 62%, hsla(calc(var(--hue) - 18), 58%, 56%, var(--alpha)), transparent 66%),
     radial-gradient(circle at 52% 52%, rgba(191, 240, 218, 0.18), transparent 74%);
-  filter: blur(18px);
-  opacity: 0.9;
+  filter: blur(14px);
+  opacity: 0.72;
   animation:
     sectionBlobFloat var(--duration, 10.5s) ease-in-out infinite alternate,
     sectionBlobPulse 3.2s ease-in-out infinite;
@@ -357,6 +523,7 @@ h6 {
   transform: translate3d(0, calc(var(--parallax-scroll) * var(--speed)), 0) rotate(var(--rotate));
   will-change: transform;
   filter: blur(0.2px);
+  opacity: 0.42;
 }
 
 .blueprint-mesh {
@@ -365,12 +532,13 @@ h6 {
   top: var(--y);
   width: var(--width);
   height: var(--height);
-  opacity: var(--opacity);
+  opacity: calc(var(--opacity) * 0.42);
   transform: translate3d(0, calc(var(--parallax-scroll) * var(--speed)), 0) rotate(var(--rotate));
   animation: blueprintDrift 18s ease-in-out infinite alternate;
   animation-delay: var(--delay);
   mix-blend-mode: screen;
   will-change: transform;
+  mask-image: radial-gradient(circle at 50% 50%, rgba(0, 0, 0, 0.3) 0%, black 22%, transparent 72%);
 }
 
 .blueprint-mesh svg {
@@ -401,8 +569,8 @@ h6 {
   inset: 2% 4% 6% 4%;
   width: calc(100% - 8%);
   height: calc(100% - 8%);
-  mask-image: radial-gradient(ellipse at 52% 50%, black 42%, transparent 92%);
-  opacity: 0.8;
+  mask-image: radial-gradient(ellipse at 46% 56%, black 34%, transparent 78%);
+  opacity: 0.32;
 }
 
 .mesh-path {
@@ -410,7 +578,7 @@ h6 {
   stroke: #2f3f4b;
   stroke-width: var(--stroke);
   stroke-linecap: round;
-  opacity: var(--opacity);
+  opacity: calc(var(--opacity) * 0.48);
   transform: translate3d(calc(var(--phase) * -1), var(--offset), 0);
   animation: meshPhase var(--duration) ease-in-out infinite;
   animation-delay: var(--delay);
@@ -537,6 +705,51 @@ h6 {
 }
 
 @media (max-width: 780px) {
+  .hero-headline {
+    max-width: 8.6ch;
+  }
+
+  .hero-proof-column {
+    gap: 1.25rem;
+  }
+
+  .hero-workflow-shell {
+    width: 100%;
+  }
+
+  .hero-workflow {
+    min-height: 15rem;
+  }
+
+  .hero-workflow::before {
+    background-size: 3rem 3rem;
+  }
+
+  .hero-workflow-node {
+    min-width: 0;
+    padding: 0.58rem 0.72rem;
+  }
+
+  .hero-workflow-node-label {
+    font-size: 0.63rem;
+    letter-spacing: 0.09em;
+  }
+
+  .hero-workflow-node-source-data,
+  .hero-workflow-node-source-teams,
+  .hero-workflow-node-outcome-ai,
+  .hero-workflow-node-outcome-vision,
+  .hero-workflow-line-link-data,
+  .hero-workflow-line-link-teams,
+  .hero-workflow-line-link-ai,
+  .hero-workflow-line-link-vision {
+    display: none;
+  }
+
+  .hero-workflow-line {
+    animation-duration: 4s;
+  }
+
   .blueprint-mesh {
     width: calc(var(--width) * 0.72);
     height: calc(var(--height) * 0.72);
@@ -556,5 +769,12 @@ h6 {
 
   .last-section-tail {
     height: 96px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-workflow-line,
+  .hero-workflow-node-core .hero-workflow-node-dot {
+    animation: none !important;
   }
 }
