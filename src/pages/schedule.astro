@@ -1,0 +1,44 @@
+---
+import SiteLayout from '@/layouts/SiteLayout.astro';
+import { getRootPath } from '@/lib/utils';
+
+const rootPath = getRootPath();
+// To show the schedule-specific thank-you message, configure Reclaim's redirect URL
+// (Embed settings → Advanced options) to: https://yoursite.com/thank-you/?from=schedule
+---
+
+<SiteLayout
+  title="Schedule a Call | Terreaux"
+  description="Book a time to speak with Terreaux about applied AI systems, agentic systems, computer vision, and AI platform ops."
+  activePage="schedule"
+>
+  <section class="rounded-3xl border border-[#bcd69f59] bg-[linear-gradient(175deg,rgba(16,21,14,0.95),rgba(8,10,7,0.99))] p-[clamp(1.2rem,3vw,2.2rem)]">
+    <p class="eyebrow">Schedule</p>
+    <h1 class="max-w-[18ch] font-display text-[clamp(2rem,5vw,4.2rem)] leading-[1.04] text-[#f7f9f2]">
+      Book a time that works.
+    </h1>
+    <p class="mt-4 max-w-[62ch] text-[#d0d9c3]">
+      Pick a slot below to schedule a call. We will follow up with a calendar invite and agenda.
+    </p>
+
+    <div class="mt-8 rounded-2xl border border-[#bcd69f40] bg-black/20 p-6">
+      <div class="min-h-[500px]">
+        <script
+          src="https://meet.reclaimai.com/scripts/embed-scheduling-link.0.1.0.js"
+          data-id="c9786fa6-ffda-49e3-bc2b-08f569966b48"
+          data-redirect="NONE"
+          is:inline
+        ></script>
+      </div>
+    </div>
+
+    <div class="mt-8">
+      <a
+        href={rootPath}
+        class="inline-flex items-center justify-center rounded-full border border-[#c3e8b1] px-5 py-3 font-display text-sm tracking-[0.08em] text-[#f7f9f2] no-underline transition-colors hover:bg-[#c3e8b1] hover:text-[#0b100a]"
+      >
+        Back Home
+      </a>
+    </div>
+  </section>
+</SiteLayout>
