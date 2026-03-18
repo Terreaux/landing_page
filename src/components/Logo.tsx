@@ -2,24 +2,18 @@ import * as React from 'react';
 
 import { cn } from '@/lib/utils';
 
-interface LogoProps extends React.SVGAttributes<SVGSVGElement> {
+interface LogoProps extends React.ImgHTMLAttributes<HTMLImageElement> {
   className?: string;
 }
 
-export function Logo({ className, ...props }: LogoProps) {
+export function Logo({ className, alt = 'Terreaux', ...props }: LogoProps) {
   return (
-    <svg
-      viewBox="0 0 24 24"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-      className={cn('text-[#c3e8b1]', className)}
-      aria-hidden
+    <img
+      src="/logo.png"
+      alt={alt}
+      className={cn('object-contain brightness-0 invert', className)}
+      aria-hidden={alt === 'Terreaux'}
       {...props}
-    >
-      <path
-        d="M4 4h6v16H4V4zm10 0h6v8h-6V4zm0 12h4v4h-4v-4z"
-        fill="currentColor"
-      />
-    </svg>
+    />
   );
 }
