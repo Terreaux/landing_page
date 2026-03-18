@@ -4,6 +4,7 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
+import { getRootPath } from '@/lib/utils';
 
 type SubmitState = 'idle' | 'submitting' | 'success' | 'error';
 
@@ -11,8 +12,7 @@ export function ContactForm() {
   const [state, setState] = useState<SubmitState>('idle');
   const [errorMessage, setErrorMessage] = useState('');
   const formspreeEndpoint = String(import.meta.env.PUBLIC_FORMSPREE_ENDPOINT ?? 'https://formspree.io/f/mojkqnbl').trim();
-  const rootPath = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL : `${import.meta.env.BASE_URL}/`;
-  const thankYouPath = `${rootPath}thank-you/`;
+  const thankYouPath = `${getRootPath()}thank-you/`;
 
   const isSubmitting = state === 'submitting';
 
@@ -55,7 +55,10 @@ export function ContactForm() {
 
       setState('success');
       form.reset();
-      window.location.assign(thankYouPath);
+      const fullUrl = thankYouPath.startsWith('http')
+        ? thankYouPath
+        : `${window.location.origin}${thankYouPath.startsWith('/') ? thankYouPath : `/${thankYouPath}`}`;
+      window.location.replace(fullUrl);
     } catch (error) {
       const message = error instanceof Error ? error.message : 'Unable to send feedback right now.';
       setState('error');
