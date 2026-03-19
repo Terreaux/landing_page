@@ -1,4 +1,5 @@
 ---
+import BlueprintCard from '@/components/BlueprintCard.astro';
 import { ContactForm } from '@/components/ContactForm';
 import SiteLayout from '@/layouts/SiteLayout.astro';
 ---
@@ -8,7 +9,7 @@ import SiteLayout from '@/layouts/SiteLayout.astro';
   description="Contact Terreaux to discuss applied AI systems, agentic systems, computer vision, and AI platform ops engagements."
   activePage="contact"
 >
-  <section class="rounded-3xl border border-[#bcd69f59] bg-[linear-gradient(175deg,rgba(16,21,14,0.95),rgba(8,10,7,0.99))] p-[clamp(1.2rem,3vw,2.2rem)]">
+  <BlueprintCard>
     <p class="eyebrow">Contact</p>
     <h1 class="max-w-[18ch] font-display text-[clamp(2rem,5vw,4.2rem)] leading-[1.04] text-[#f7f9f2]">
       Tell us what you need to build.
@@ -20,5 +21,5 @@ import SiteLayout from '@/layouts/SiteLayout.astro';
     <div class="mt-8 max-w-[720px]">
       <ContactForm client:load />
     </div>
-  </section>
+  </BlueprintCard>
 </SiteLayout>

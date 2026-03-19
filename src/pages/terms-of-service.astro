@@ -1,0 +1,87 @@
+---
+import BlueprintCard from '@/components/BlueprintCard.astro';
+import SiteLayout from '@/layouts/SiteLayout.astro';
+import { getRootPath } from '@/lib/utils';
+
+const rootPath = getRootPath();
+---
+
+<SiteLayout
+  title="Terms of Service | Terreaux"
+  description="Terms of Service for Terreaux consulting and contracting studio."
+>
+  <BlueprintCard>
+    <p class="eyebrow">Legal</p>
+    <h1 class="max-w-[18ch] font-display text-[clamp(2rem,5vw,4.2rem)] leading-[1.04] text-[#f7f9f2]">
+      Terms of Service
+    </h1>
+    <p class="mt-4 max-w-[62ch] text-[#d0d9c3]">
+      Last updated: March 2025
+    </p>
+
+    <div class="prose-legal mt-10 space-y-8 text-[#d0d9c3]">
+      <section>
+        <h2 class="eyebrow mb-2 mt-8 font-display text-base font-semibold text-[#f7f9f2]">
+          Agreement
+        </h2>
+        <p>
+          By engaging Terreaux for consulting, contracting, or other services, you agree to these Terms of Service. If you do not agree, please do not use our services.
+        </p>
+      </section>
+
+      <section>
+        <h2 class="eyebrow mb-2 mt-8 font-display text-base font-semibold text-[#f7f9f2]">
+          Services
+        </h2>
+        <p>
+          Terreaux provides applied AI systems consulting, agentic systems development, computer vision solutions, and AI platform operations (MLOps, LLMOps). Specific deliverables, timelines, and fees are defined in individual statements of work or engagement letters.
+        </p>
+      </section>
+
+      <section>
+        <h2 class="eyebrow mb-2 mt-8 font-display text-base font-semibold text-[#f7f9f2]">
+          Confidentiality
+        </h2>
+        <p>
+          Both parties agree to keep confidential any proprietary or sensitive information disclosed during the engagement, except as required by law or with written consent.
+        </p>
+      </section>
+
+      <section>
+        <h2 class="eyebrow mb-2 mt-8 font-display text-base font-semibold text-[#f7f9f2]">
+          Intellectual Property
+        </h2>
+        <p>
+          Ownership of work product is determined by the terms of each engagement. Unless otherwise agreed, pre-existing materials remain with their respective owners.
+        </p>
+      </section>
+
+      <section>
+        <h2 class="eyebrow mb-2 mt-8 font-display text-base font-semibold text-[#f7f9f2]">
+          Limitation of Liability
+        </h2>
+        <p>
+          Terreaux’s liability is limited to the fees paid for the specific engagement giving rise to the claim. We are not liable for indirect, incidental, or consequential damages.
+        </p>
+      </section>
+
+      <section>
+        <h2 class="eyebrow mb-2 mt-8 font-display text-base font-semibold text-[#f7f9f2]">
+          Contact
+        </h2>
+        <p>
+          Questions about these terms? Reach out via our <a href={`${rootPath}contact/`} class="text-[#98f2be] underline transition-colors hover:text-[#c3e8b1]">contact page</a>.
+        </p>
+      </section>
+    </div>
+
+    <div class="mt-12">
+      <a
+        href={rootPath}
+        class="inline-flex items-center justify-center rounded-full border border-[#c3e8b1] px-5 py-3 font-display text-sm tracking-[0.08em] text-[#f7f9f2] no-underline transition-colors hover:bg-[#c3e8b1] hover:text-[#0b100a]"
+      >
+        Back Home
+      </a>
+    </div>
+  </BlueprintCard>
+</SiteLayout>

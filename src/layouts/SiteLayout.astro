@@ -1,6 +1,7 @@
 ---
-import SiteHeader from '@/components/SiteHeader.astro';
+import { SiteHeader } from '@/components/SiteHeader';
 import BaseLayout from '@/layouts/BaseLayout.astro';
+import { getRootPath } from '@/lib/utils';
 
 interface Props {
   title?: string;
@@ -9,12 +10,13 @@ interface Props {
 }
 
 const { title, description, activePage } = Astro.props;
+const rootPath = getRootPath();
 ---
 
 <BaseLayout title={title} description={description}>
   <div class="site-bg" aria-hidden="true" />
 
-  <SiteHeader activePage={activePage} />
+  <SiteHeader client:load rootPath={rootPath} activePage={activePage} />
 
   <main class="mx-auto w-[min(980px,92vw)] py-16 md:py-24">
     <slot />
