@@ -50,12 +50,11 @@ export function HeroSection() {
             Consulting + Contracting Studio
           </p>
           <h1
-            className="reveal hero-headline font-display text-[clamp(2.4rem,5.2vw,5.4rem)] font-extrabold leading-[0.98] tracking-[0.06em]"
+            className="reveal hero-headline font-display text-[clamp(1.75rem,3.4vw,3.6rem)] font-extrabold leading-[0.98] tracking-[0.06em]"
             data-reveal
           >
-            Applied Intelligence,
-            <br />
-            Built for <span className="gradient-text">Real-World Delivery.</span>
+            APPLIED INTELLIGENCE, <br />
+            BUILT FOR<span className="gradient-text"> REAL-WORLD DELIVERY.</span>
           </h1>
         </div>
 
