@@ -1,8 +1,9 @@
 ---
 import BaseLayout from '@/layouts/BaseLayout.astro';
 import { LandingPage } from '@/components/LandingPage';
+import { getRootPath } from '@/lib/utils';
 ---
 
 <BaseLayout>
-  <LandingPage client:load />
+  <LandingPage client:load rootPath={getRootPath()} />
 </BaseLayout>

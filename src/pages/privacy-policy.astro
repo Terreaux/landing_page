@@ -1,0 +1,87 @@
+---
+import BlueprintCard from '@/components/BlueprintCard.astro';
+import SiteLayout from '@/layouts/SiteLayout.astro';
+import { getRootPath } from '@/lib/utils';
+
+const rootPath = getRootPath();
+---
+
+<SiteLayout
+  title="Privacy Policy | Terreaux"
+  description="Privacy Policy for Terreaux consulting and contracting studio."
+>
+  <BlueprintCard>
+    <p class="eyebrow">Legal</p>
+    <h1 class="max-w-[18ch] font-display text-[clamp(2rem,5vw,4.2rem)] leading-[1.04] text-[#f7f9f2]">
+      Privacy Policy
+    </h1>
+    <p class="mt-4 max-w-[62ch] text-[#d0d9c3]">
+      Last updated: March 2025
+    </p>
+
+    <div class="prose-legal mt-10 space-y-8 text-[#d0d9c3]">
+      <section>
+        <h2 class="eyebrow mb-2 mt-8 font-display text-base font-semibold text-[#f7f9f2]">
+          Overview
+        </h2>
+        <p>
+          Terreaux respects your privacy. This policy describes how we collect, use, and protect information when you use our website or engage our services.
+        </p>
+      </section>
+
+      <section>
+        <h2 class="eyebrow mb-2 mt-8 font-display text-base font-semibold text-[#f7f9f2]">
+          Information We Collect
+        </h2>
+        <p>
+          We may collect contact information (name, email, company) when you submit forms, book calls, or engage with us. We also collect technical data such as IP address and browser type for site analytics and security.
+        </p>
+      </section>
+
+      <section>
+        <h2 class="eyebrow mb-2 mt-8 font-display text-base font-semibold text-[#f7f9f2]">
+          How We Use It
+        </h2>
+        <p>
+          We use your information to respond to inquiries, deliver services, improve our website, and comply with legal obligations. We do not sell your personal data.
+        </p>
+      </section>
+
+      <section>
+        <h2 class="eyebrow mb-2 mt-8 font-display text-base font-semibold text-[#f7f9f2]">
+          Third-Party Services
+        </h2>
+        <p>
+          Our site uses third-party tools for forms, scheduling, and analytics. These providers have their own privacy policies. We use Formspree for contact forms and Reclaim for scheduling.
+        </p>
+      </section>
+
+      <section>
+        <h2 class="eyebrow mb-2 mt-8 font-display text-base font-semibold text-[#f7f9f2]">
+          Your Rights
+        </h2>
+        <p>
+          You may request access to, correction of, or deletion of your personal data. We comply with applicable privacy laws including GDPR and CCPA. See our <a href={`${rootPath}security/`} class="text-[#98f2be] underline transition-colors hover:text-[#c3e8b1]">Security</a> page for more on how we protect your data.
+        </p>
+      </section>
+
+      <section>
+        <h2 class="eyebrow mb-2 mt-8 font-display text-base font-semibold text-[#f7f9f2]">
+          Contact
+        </h2>
+        <p>
+          For privacy-related requests, reach out via our <a href={`${rootPath}contact/`} class="text-[#98f2be] underline transition-colors hover:text-[#c3e8b1]">contact page</a>.
+        </p>
+      </section>
+    </div>
+
+    <div class="mt-12">
+      <a
+        href={rootPath}
+        class="inline-flex items-center justify-center rounded-full border border-[#c3e8b1] px-5 py-3 font-display text-sm tracking-[0.08em] text-[#f7f9f2] no-underline transition-colors hover:bg-[#c3e8b1] hover:text-[#0b100a]"
+      >
+        Back Home
+      </a>
+    </div>
+  </BlueprintCard>
+</SiteLayout>

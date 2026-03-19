@@ -7,7 +7,7 @@ export function ServicesSection() {
       <div className="relative z-10 reveal mb-16 md:mb-20" data-reveal>
         <p className="eyebrow">Core Expertise</p>
         <h2 className="max-w-[21ch] font-display text-[clamp(1.6rem,4vw,3.25rem)] leading-[1.05]">
-          End-to-end delivery from strategy to stable production.
+        From strategy and architecture to production delivery.
         </h2>
       </div>
 

@@ -1,37 +1,37 @@
 export const serviceCards = [
   {
     title: 'Applied AI Systems',
-    copy: 'Design and implementation of AI products mapped to business constraints and operational realities.'
+    copy: 'AI products aligned to business goals, technical constraints, and operational realities.'
   },
   {
     title: 'Agentic Systems',
-    copy: 'Design and deployment of autonomous AI workflows that coordinate tools, data, and decisions in production.'
+    copy: 'Autonomous workflows coordinating tools, data, decisions, and execution in production.'
   },
   {
     title: 'Computer Vision',
-    copy: 'Vision systems for inspection, perception, and automation with production-ready data and model pipelines.'
+    copy: 'Vision systems for inspection, perception, automation, and deployment in real-world environments.'
   },
   {
     title: 'AI Platform Ops (MLOps + LLMOps)',
-    copy: 'Unified platform operations for model training, deployment, evaluation, monitoring, governance, and continuous iteration.'
+    copy: 'Operational foundations for training, deployment, evaluation, monitoring, and governance.'
   }
 ];
 
 export const timelineItems = [
   {
     step: '01',
-    title: 'Frame the opportunity',
-    copy: 'We align outcomes, constraints, and success metrics before implementation starts.'
+    title: 'Define the engagement',
+    copy: 'WWe align on the business objective, technical constraints, scope, and success criteria before build work begins.'
   },
   {
     step: '02',
-    title: 'Build in production shape',
-    copy: 'Data, modeling, infrastructure, and product interfaces are implemented as one coherent system.'
+    title: 'Build for production',
+    copy: 'We develop data, models, infrastructure, and user workflows as one integrated system designed for real operating conditions.'
   },
   {
     step: '03',
-    title: 'Stabilize and transfer',
-    copy: 'We establish runbooks, metrics, and ownership workflows so your team can scale confidently.'
+    title: 'Operationalize and hand off',
+    copy: 'We establish evaluation, monitoring, runbooks, and ownership workflows so your team can run, extend, and scale the system with confidence.'
   }
 ];
 
