@@ -3,7 +3,7 @@ import type { LucideIcon } from 'lucide-react';
 import { CalendarDaysIcon, CameraIcon, CpuIcon, DatabaseIcon, EyeIcon, FileTextIcon, MessageSquareIcon, SearchIcon } from 'lucide-react';
 import { AnimatePresence, motion, useInView, useReducedMotion } from 'motion/react';
 
-import { constructionVisionScenarios } from '@/data/landing';
+import { constructionVisionScenarios } from '@/data/serviceRuntimes';
 import { cn } from '@/lib/utils';
 
 const DETECTION_INTERVAL_MS = 440;

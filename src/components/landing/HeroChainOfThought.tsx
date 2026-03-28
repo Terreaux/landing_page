@@ -17,7 +17,7 @@ import {
 } from 'lucide-react';
 import { AnimatePresence, motion, useInView, useReducedMotion } from 'motion/react';
 
-import { heroThoughtScenarios, type HeroThoughtIconKey } from '@/data/landing';
+import { heroThoughtScenarios, type HeroThoughtIconKey } from '@/data/serviceRuntimes';
 import { cn } from '@/lib/utils';
 
 const PROMPT_INTERVAL_MS = 56;
