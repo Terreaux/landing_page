@@ -1,0 +1,25 @@
+---
+import { ServicePageContent } from '@/components/ServicePageContent';
+import { SiteHeader } from '@/components/SiteHeader';
+import { servicePages } from '@/data/services';
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import { getRootPath } from '@/lib/utils';
+
+export function getStaticPaths() {
+  return servicePages.map((service) => ({
+    params: { slug: service.slug },
+    props: { service }
+  }));
+}
+
+const { service } = Astro.props;
+const rootPath = getRootPath();
+---
+
+<BaseLayout title={`${service.title} | Terreaux`} description={service.metaDescription}>
+  <div class="site-bg" aria-hidden="true" />
+  <SiteHeader client:load rootPath={rootPath} activePage="services" />
+  <main>
+    <ServicePageContent client:load rootPath={rootPath} service={service} />
+  </main>
+</BaseLayout>
