@@ -1,0 +1,19 @@
+---
+import { SiteHeader } from '@/components/SiteHeader';
+import { SecurityContent } from '@/components/SecurityContent';
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import { getRootPath } from '@/lib/utils';
+
+const rootPath = getRootPath();
+---
+
+<BaseLayout
+  title="Security | Terreaux"
+  description="Security for sensitive AI and software engagements. Terreaux defines project-specific controls for confidentiality, restricted workflows, and export-control-aware delivery."
+>
+  <div class="site-bg" aria-hidden="true" />
+  <SiteHeader client:load rootPath={rootPath} />
+  <main>
+    <SecurityContent client:load rootPath={rootPath} />
+  </main>
+</BaseLayout>
