@@ -1,4 +1,5 @@
 export { ApproachSection } from './ApproachSection';
+export { ConstructionVisionSection } from './ConstructionVisionSection';
 export { ContactSection } from './ContactSection';
 export { HeroSection } from './HeroSection';
 export { LandingDecorations } from './LandingDecorations';
