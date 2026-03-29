@@ -1,0 +1,30 @@
+---
+import { ConstructionVisionSection } from '@/components/landing/ConstructionVisionSection';
+import { SiteHeader } from '@/components/SiteHeader';
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import { getRootPath } from '@/lib/utils';
+
+const rootPath = getRootPath();
+---
+
+<BaseLayout
+  title="Computer Vision Runtime Preview | Terreaux"
+  description="Standalone preview page for the Terreaux computer vision reasoning runtime animation."
+>
+  <div class="site-bg" aria-hidden="true" />
+  <SiteHeader client:load rootPath={rootPath} />
+  <main class="mx-auto flex w-[min(1280px,94vw)] justify-center pb-24 pt-12 text-[#f7f9f2] md:pb-32 md:pt-16">
+    <section class="w-full max-w-[66rem]">
+      <div class="w-full">
+        <ConstructionVisionSection
+          client:load
+          className="py-0 md:py-0"
+          enableReveal={false}
+          showBlob={false}
+          showHeading={false}
+          layout="stacked"
+        />
+      </div>
+    </section>
+  </main>
+</BaseLayout>
