@@ -43,7 +43,7 @@ export function ApproachSection() {
       <div className="relative z-10 reveal mb-16 md:mb-20" data-reveal>
         <p className="eyebrow">How We Work</p>
         <h2 className="max-w-[21ch] font-display text-[clamp(1.6rem,4vw,3.25rem)] leading-[1.05]">
-          Lean teams, fast cycles, and clear accountability.
+        Senior execution from scoped problem to operational system.
         </h2>
       </div>
 

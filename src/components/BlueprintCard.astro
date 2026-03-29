@@ -1,0 +1,26 @@
+---
+interface Props {
+  class?: string;
+}
+
+const { class: className = '' } = Astro.props;
+---
+
+<div
+  class:list={[
+    'blueprint-card relative overflow-visible rounded-none bg-[linear-gradient(180deg,rgba(10,15,12,0.95),rgba(5,8,6,0.98))] p-6 md:p-7',
+    className
+  ]}
+>
+  <span class="blueprint-card-frame" aria-hidden="true">
+    <span class="blueprint-card-line blueprint-card-line-top" />
+    <span class="blueprint-card-line blueprint-card-line-right" />
+    <span class="blueprint-card-line blueprint-card-line-bottom" />
+    <span class="blueprint-card-line blueprint-card-line-left" />
+    <span class="blueprint-card-cross blueprint-card-cross-tl" />
+    <span class="blueprint-card-cross blueprint-card-cross-tr" />
+    <span class="blueprint-card-cross blueprint-card-cross-br" />
+    <span class="blueprint-card-cross blueprint-card-cross-bl" />
+  </span>
+  <slot />
+</div>

@@ -1,4 +1,5 @@
 ---
+import BlueprintCard from '@/components/BlueprintCard.astro';
 import SiteLayout from '@/layouts/SiteLayout.astro';
 import { getRootPath } from '@/lib/utils';
 
@@ -12,24 +13,22 @@ const rootPath = getRootPath();
   description="Book a time to speak with Terreaux about applied AI systems, agentic systems, computer vision, and AI platform ops."
   activePage="schedule"
 >
-  <section class="rounded-3xl border border-[#bcd69f59] bg-[linear-gradient(175deg,rgba(16,21,14,0.95),rgba(8,10,7,0.99))] p-[clamp(1.2rem,3vw,2.2rem)]">
+  <BlueprintCard>
     <p class="eyebrow">Schedule</p>
     <h1 class="max-w-[18ch] font-display text-[clamp(2rem,5vw,4.2rem)] leading-[1.04] text-[#f7f9f2]">
-      Book a time that works.
+      Book a discovery call.
     </h1>
     <p class="mt-4 max-w-[62ch] text-[#d0d9c3]">
-      Pick a slot below to schedule a call. We will follow up with a calendar invite and agenda.
+      Select a time below to discuss your goals, current challenges, and whether Terreaux is the right fit.
     </p>
 
-    <div class="mt-8 rounded-2xl border border-[#bcd69f40] bg-black/20 p-6">
-      <div class="min-h-[500px]">
-        <script
-          src="https://meet.reclaimai.com/scripts/embed-scheduling-link.0.1.0.js"
-          data-id="c9786fa6-ffda-49e3-bc2b-08f569966b48"
-          data-redirect="NONE"
-          is:inline
-        ></script>
-      </div>
+    <div class="mt-8 min-h-[500px]">
+      <script
+        src="https://meet.reclaimai.com/scripts/embed-scheduling-link.0.1.0.js"
+        data-id="c9786fa6-ffda-49e3-bc2b-08f569966b48"
+        data-redirect="NONE"
+        is:inline
+      ></script>
     </div>
 
     <div class="mt-8">
@@ -40,5 +39,5 @@ const rootPath = getRootPath();
         Back Home
       </a>
     </div>
-  </section>
+  </BlueprintCard>
 </SiteLayout>

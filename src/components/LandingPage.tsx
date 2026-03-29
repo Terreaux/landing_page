@@ -5,12 +5,16 @@ import {
   ContactSection,
   HeroSection,
   LandingDecorations,
-  LandingHeader,
   ServicesSection,
   WorkflowBridgeSection
 } from '@/components/landing';
+import { SiteHeader } from '@/components/SiteHeader';
 
-export function LandingPage() {
+interface LandingPageProps {
+  rootPath?: string;
+}
+
+export function LandingPage({ rootPath = '/' }: LandingPageProps) {
   useEffect(() => {
     const revealEls = document.querySelectorAll<HTMLElement>('[data-reveal]');
     const observer = new IntersectionObserver(
@@ -119,7 +123,7 @@ export function LandingPage() {
     <>
       <div className="site-bg" aria-hidden="true" />
 
-      <LandingHeader />
+      <SiteHeader rootPath={rootPath} />
 
       <main className="relative mx-auto w-[min(1200px,92vw)] pb-24 md:pb-32 font-monoSans text-[#f7f9f2]">
         <LandingDecorations />

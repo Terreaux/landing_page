@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { getRootPath } from '@/lib/utils';
 
 const contactContent = {
@@ -50,19 +51,25 @@ export function ThankYouContent() {
       <p className="mt-4 max-w-[60ch] text-[#d0d9c3]">{content.body}</p>
 
       <div className="mt-8 grid gap-4 md:grid-cols-2">
-        <div className="rounded-2xl border border-[#bcd69f40] bg-black/20 p-6">
-          <p className="font-display text-lg text-[#f7f9f2]">Email</p>
-          <a
-            href="mailto:hello@terreaux.co"
-            className="mt-3 inline-block text-[#c3e8b1] no-underline transition-colors hover:text-[#f7f9f2]"
-          >
-            hello@terreaux.co
-          </a>
-        </div>
-        <div className="rounded-2xl border border-[#bcd69f40] bg-black/20 p-6">
-          <p className="font-display text-lg text-[#f7f9f2]">Next Step</p>
-          <p className="mt-3 text-[#d0d9c3]">{content.nextStep}</p>
-        </div>
+        <Card>
+          <CardHeader>
+            <CardTitle>Email</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <a
+              href="mailto:hello@terreaux.co"
+              className="inline-block text-[#c3e8b1] no-underline transition-colors hover:text-[#f7f9f2]"
+            >
+              hello@terreaux.co
+            </a>
+          </CardContent>
+        </Card>
+        <Card>
+          <CardHeader>
+            <CardTitle>Next Step</CardTitle>
+          </CardHeader>
+          <CardContent>{content.nextStep}</CardContent>
+        </Card>
       </div>
 
       <div className="mt-8 flex flex-wrap gap-3">

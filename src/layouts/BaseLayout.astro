@@ -1,4 +1,6 @@
 ---
+import { SiteFooter } from '@/components/SiteFooter';
+import { getRootPath } from '@/lib/utils';
 import '@/styles/global.css';
 
 interface Props {
@@ -30,5 +32,6 @@ const {
   </head>
   <body>
     <slot />
+    <SiteFooter rootPath={getRootPath()} />
   </body>
 </html>
