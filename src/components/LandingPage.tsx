@@ -130,7 +130,7 @@ export function LandingPage({ rootPath = '/' }: LandingPageProps) {
 
         <div className="relative z-10">
           <HeroSection />
-          <ServicesSection />
+          <ServicesSection rootPath={rootPath} />
           <WorkflowBridgeSection />
           <ApproachSection />
           <ContactSection />
