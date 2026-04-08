@@ -1,0 +1,69 @@
+---
+import BlueprintCard from '@/components/BlueprintCard.astro';
+import { ContactForm } from '@/islands/ContactForm';
+import { getContactCopy } from '@/data/contact-copy';
+import { getRootPath } from '@/lib/utils';
+
+interface Props {
+  variant: 'landing' | 'page';
+}
+
+const { variant } = Astro.props;
+const rootPath = getRootPath();
+const copy = getContactCopy(variant);
+
+const scheduleHref = `${rootPath}schedule/`;
+
+const cardGridClass =
+  'relative z-10 reveal grid gap-8 p-[clamp(1.2rem,3vw,2.2rem)] md:grid-cols-[1.05fr_1fr] md:gap-10';
+
+const titleClass =
+  variant === 'page'
+    ? 'font-display text-[clamp(2rem,5vw,4.2rem)] leading-[1.04] text-[#f7f9f2]'
+    : 'font-display text-[clamp(1.7rem,4vw,3rem)] leading-[1.05] text-[#f7f9f2]';
+
+const outlineLinkClass =
+  'inline-flex h-9 w-fit items-center justify-center whitespace-nowrap rounded-full border border-[#c1e19b6b] px-4 text-sm font-semibold text-[#e2f0c8] transition-all hover:-translate-y-0.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#d6ffc8]';
+
+const blobStyle =
+  '--x: 22%; --y: 20%; --size: 30rem; --hue: 172; --alpha: 0.22; --drift-x: 90px; --drift-y: -54px; --duration: 10.2s; --delay: -2.1s';
+---
+
+{
+  variant === 'landing' ? (
+    <section id="contact" class="relative scroll-mt-28 pt-24 pb-28 md:pt-32 md:pb-36">
+      <span class="section-blob" style={blobStyle} aria-hidden="true" />
+      <BlueprintCard class:list={[cardGridClass]}>
+        <div class="flex flex-col gap-4">
+          <p class="eyebrow">{copy.eyebrow}</p>
+          <h2 class={titleClass}>{copy.headline}</h2>
+          <p class="mt-3 max-w-[56ch] text-[#d0d9c3]">{copy.body}</p>
+          <a href={scheduleHref} class={outlineLinkClass}>
+            Schedule a time
+          </a>
+        </div>
+        <div class="flex flex-col gap-4">
+          <ContactForm client:visible />
+        </div>
+      </BlueprintCard>
+      <div class="last-section-tail" aria-hidden="true">
+        <span class="last-section-cross last-section-cross-left" />
+        <span class="last-section-cross last-section-cross-right" />
+      </div>
+    </section>
+  ) : (
+    <BlueprintCard class:list={[cardGridClass]}>
+      <div class="flex flex-col gap-4">
+        <p class="eyebrow">{copy.eyebrow}</p>
+        <h1 class={titleClass}>{copy.headline}</h1>
+        <p class="mt-3 max-w-[56ch] text-[#d0d9c3]">{copy.body}</p>
+        <a href={scheduleHref} class={outlineLinkClass}>
+          Schedule a time
+        </a>
+      </div>
+      <div class="flex flex-col gap-4">
+        <ContactForm client:visible />
+      </div>
+    </BlueprintCard>
+  )
+}

@@ -1,0 +1,18 @@
+---
+/**
+ * Composition shell for the site header region. Defaults to `SiteHeader`; pass
+ * children to replace it with a different header implementation.
+ */
+import { SiteHeader } from '@/islands/SiteHeader';
+
+interface Props {
+  rootPath?: string;
+  activePage?: 'services' | 'approach' | 'contact' | 'schedule';
+}
+
+const { rootPath = '/', activePage } = Astro.props;
+---
+
+<slot>
+  <SiteHeader client:idle rootPath={rootPath} activePage={activePage} />
+</slot>

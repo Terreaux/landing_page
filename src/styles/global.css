@@ -6,7 +6,14 @@
   color-scheme: dark;
   --parallax-scroll: 0px;
   --blueprint-edge-offset: max(1rem, 2vw);
-  --blueprint-cross-half: 7px;
+  /* Half of the 16px .blueprint-cross box — guide lines run through the cross center */
+  --blueprint-cross-half: 8px;
+  /* Viewport inset to the vertical blueprint guides (matches header cross centers) */
+  --blueprint-guide-inset: calc(var(--blueprint-edge-offset) + var(--blueprint-cross-half));
+  /* Space between guide lines and column content */
+  --blueprint-content-gap: clamp(0.45rem, 1.15vw, 0.7rem);
+  /* Inset from viewport edge to main content column */
+  --blueprint-content-inset: calc(var(--blueprint-guide-inset) + var(--blueprint-content-gap));
   --blueprint-line-thickness: 2px;
   --blueprint-cross-thickness: 2px;
 }
@@ -1604,7 +1611,7 @@ h6 {
   will-change: transform;
 }
 
-.last-section-tail {
+.last-section-tail:not(.last-section-tail--footer) {
   position: absolute;
   left: 50%;
   bottom: -124px;
@@ -1657,6 +1664,22 @@ h6 {
 
 .last-section-cross-right {
   left: var(--blueprint-guide-right-x, calc(100vw - var(--blueprint-edge-offset) - var(--blueprint-cross-half)));
+}
+
+/* Fused with `SiteFooter` on landing: one top line + crosses, no absolute gap above `<footer>`. */
+.last-section-tail--footer {
+  position: relative;
+  left: 50%;
+  bottom: auto;
+  width: 100vw;
+  height: auto;
+  min-height: 0;
+  transform: translateX(-50%);
+  border-top: 2px solid rgba(209, 228, 176, 0.18);
+  padding-bottom: 0.75rem;
+  pointer-events: none;
+  overflow: visible;
+  z-index: 2;
 }
 
 .soil-field {
@@ -2094,7 +2117,7 @@ h6 {
     min-height: 16.5rem;
   }
 
-  .last-section-tail {
+  .last-section-tail:not(.last-section-tail--footer) {
     height: 96px;
   }
 }
@@ -2184,3 +2207,29 @@ h6 {
     animation: none !important;
   }
 }
+
+/* Markdown from content collections (ArticleLayout .article-markdown) */
+.article-markdown :where(h2) {
+  @apply mb-2 mt-8 font-display text-base font-semibold text-[#f7f9f2];
+}
+
+.article-markdown :where(p) {
+  @apply text-[#d0d9c3];
+}
+
+.article-markdown :where(a) {
+  @apply text-[#98f2be] underline transition-colors hover:text-[#c3e8b1];
+}
+
+.article-markdown :where(ul) {
+  @apply list-disc space-y-2 pl-5;
+}
+
+.article-markdown :where(li) {
+  @apply text-[#d0d9c3];
+}
+
+.article-markdown :where(strong) {
+  @apply font-semibold text-[#f7f9f2];
+}
+

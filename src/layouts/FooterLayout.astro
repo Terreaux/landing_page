@@ -1,0 +1,17 @@
+---
+/**
+ * Composition shell for the site footer region. Defaults to `SiteFooter`; pass
+ * children to replace it with a different footer implementation.
+ */
+import { SiteFooter } from '@/islands/SiteFooter';
+
+interface Props {
+  rootPath?: string;
+}
+
+const { rootPath = '/' } = Astro.props;
+---
+
+<slot>
+  <SiteFooter rootPath={rootPath} />
+</slot>
