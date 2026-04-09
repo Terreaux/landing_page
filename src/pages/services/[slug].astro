@@ -1,8 +1,7 @@
 ---
-import { ServicePageContent } from '@/components/ServicePageContent';
-import { SiteHeader } from '@/components/SiteHeader';
+import { ServicePageContent } from '@/islands/ServicePageContent';
 import { servicePages } from '@/data/services';
-import BaseLayout from '@/layouts/BaseLayout.astro';
+import SiteLayout from '@/layouts/SiteLayout.astro';
 import { getRootPath } from '@/lib/utils';
 
 export function getStaticPaths() {

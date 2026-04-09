@@ -1,9 +1,9 @@
 ---
-import BaseLayout from '@/layouts/BaseLayout.astro';
-import { LandingPage } from '@/components/LandingPage';
+import { LandingPage } from '@/islands/LandingPage';
+import SiteLayout from '@/layouts/SiteLayout.astro';
 import { getRootPath } from '@/lib/utils';
 ---
 
-<BaseLayout>
-  <LandingPage client:load rootPath={getRootPath()} />
-</BaseLayout>
+<SiteLayout mainVariant="landing">
+  <LandingPage client:idle rootPath={getRootPath()} />
+</SiteLayout>
