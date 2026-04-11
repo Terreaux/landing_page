@@ -44,28 +44,22 @@ export function HeroSection() {
         }
         aria-hidden="true"
       />
-      <div className="relative z-10 mx-auto grid min-h-[calc(88vh-10rem)] w-[min(1200px,92vw)] gap-12 py-[max(2rem,6vh)] lg:grid-cols-[minmax(0,0.95fr)_minmax(20rem,0.82fr)] lg:items-center lg:gap-14">
-        <div className="max-w-[42rem] self-start pt-[8vh] md:pt-[12vh] lg:pt-[8vh]">
+      <div className="relative z-10 mx-auto flex min-h-[calc(88vh-10rem)] w-[min(1200px,92vw)] py-[max(2rem,6vh)]">
+        <div className="max-w-[44rem] self-start pt-[8vh] md:pt-[12vh] lg:pt-[8vh]">
           <p className="eyebrow hero-eyebrow reveal" data-reveal>
             Consulting + Contracting Studio
           </p>
           <h1
-            className="reveal hero-headline font-display text-[clamp(2.4rem,5.2vw,5.4rem)] font-extrabold leading-[0.98] tracking-[0.06em]"
+            className="reveal hero-headline font-display text-[clamp(2rem,4.35vw,4.65rem)] font-extrabold leading-[0.98] tracking-[0.05em]"
             data-reveal
           >
             Applied Intelligence,
             <br />
             Built for <span className="gradient-text">Real-World Delivery.</span>
           </h1>
-        </div>
-
-        <div className="hero-proof-column w-full pb-[max(1.25rem,env(safe-area-inset-bottom))] lg:pb-8">
-          <p
-            className="reveal max-w-[34rem] text-balance text-[clamp(1rem,1.35vw,1.14rem)] leading-[1.7] text-[#d4dec7]"
-            data-reveal
-          >
-            Terreaux builds applied AI systems, agentic systems, computer vision solutions, and production-grade AI
-            platform ops for teams that need outcomes, not prototypes.
+          <p className="reveal mt-6 max-w-[34rem] text-[0.98rem] leading-[1.82] text-[#d4dec8]" data-reveal>
+            Terreaux designs AI systems that move real work across operations: agentic workflows, computer vision
+            programs, and the production infrastructure that keeps them reliable once teams depend on them.
           </p>
           <div className="reveal mt-8 flex flex-wrap gap-3" data-reveal>
             <Button asChild>
