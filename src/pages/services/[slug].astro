@@ -15,10 +15,11 @@ const { service } = Astro.props;
 const rootPath = getRootPath();
 ---
 
-<BaseLayout title={`${service.title} | Terreaux`} description={service.metaDescription}>
-  <div class="site-bg" aria-hidden="true" />
-  <SiteHeader client:load rootPath={rootPath} activePage="services" />
-  <main>
-    <ServicePageContent client:load rootPath={rootPath} service={service} />
-  </main>
-</BaseLayout>
+<SiteLayout
+  title={`${service.title} | Terreaux`}
+  description={service.metaDescription}
+  activePage="services"
+  mainVariant="fluid"
+>
+  <ServicePageContent client:visible rootPath={rootPath} service={service} />
+</SiteLayout>

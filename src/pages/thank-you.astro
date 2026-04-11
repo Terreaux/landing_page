@@ -1,11 +1,11 @@
 ---
 import SiteLayout from '@/layouts/SiteLayout.astro';
-import { ThankYouContent } from '@/components/ThankYouContent';
+import { ThankYouContent } from '@/islands/ThankYouContent';
 ---
 
 <SiteLayout
   title="Thank You | Terreaux"
   description="Thanks for contacting Terreaux. We will follow up shortly with next steps."
 >
-  <ThankYouContent client:load />
+  <ThankYouContent client:visible />
 </SiteLayout>
