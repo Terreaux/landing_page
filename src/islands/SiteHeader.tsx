@@ -99,12 +99,12 @@ export function SiteHeader({ rootPath = '/', activePage }: SiteHeaderProps) {
       {menuOpen ? (
         <>
           <div
-            className="fixed inset-x-0 bottom-0 top-[4.75rem] z-30 bg-black/65 md:hidden"
+            className="fixed inset-x-0 bottom-0 top-[4.75rem] z-30 bg-[#030403]/88 backdrop-blur-sm md:hidden"
             role="presentation"
             onClick={() => setMenuOpen(false)}
           />
           <nav
-            className="fixed left-0 right-0 top-[4.75rem] z-40 max-h-[min(70vh,calc(100dvh-4.75rem))] overflow-y-auto border-b border-[#d1e4b033] bg-[#060706]/98 shadow-[0_12px_48px_rgba(0,0,0,0.45)] backdrop-blur-md md:hidden"
+            className="fixed left-0 right-0 top-[4.75rem] z-40 max-h-[min(70vh,calc(100dvh-4.75rem))] overflow-y-auto border-b border-[#d1e4b055] bg-[#060706] shadow-[0_16px_56px_rgba(0,0,0,0.55)] md:hidden"
             id={menuPanelId}
             role="dialog"
             aria-modal="true"
