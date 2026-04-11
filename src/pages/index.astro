@@ -1,9 +1,26 @@
 ---
-import { LandingPage } from '@/islands/LandingPage';
+import ApproachSection from '@/components/landing/ApproachSection.astro';
+import ContactBlock from '@/components/ContactBlock.astro';
+import HeroSection from '@/components/landing/HeroSection.astro';
+import LandingDecorations from '@/components/landing/LandingDecorations.astro';
+import LandingEffects from '@/components/landing/LandingEffects.astro';
+import ServicesSection from '@/components/landing/ServicesSection.astro';
+import WorkflowBridgeSection from '@/components/landing/WorkflowBridgeSection.astro';
 import SiteLayout from '@/layouts/SiteLayout.astro';
 import { getRootPath } from '@/lib/utils';
+
+const rootPath = getRootPath();
 ---
 
 <SiteLayout mainVariant="landing">
-  <LandingPage client:idle rootPath={getRootPath()} />
+  <LandingEffects />
+  <LandingDecorations />
+
+  <div class="relative z-10">
+    <HeroSection />
+    <ServicesSection rootPath={rootPath} />
+    <WorkflowBridgeSection />
+    <ApproachSection />
+    <ContactBlock variant="landing" />
+  </div>
 </SiteLayout>

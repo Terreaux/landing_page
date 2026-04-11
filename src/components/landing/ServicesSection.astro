@@ -1,0 +1,11 @@
+---
+import { ServicesSection } from '@/islands/landing/ServicesSection';
+
+interface Props {
+  rootPath?: string;
+}
+
+const { rootPath = '/' } = Astro.props;
+---
+
+<ServicesSection client:visible rootPath={rootPath} />

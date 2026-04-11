@@ -1588,6 +1588,14 @@ h6 {
   left: var(--blueprint-guide-right-x, calc(100vw - var(--blueprint-edge-offset) - var(--blueprint-cross-half)));
 }
 
+/*
+ * Guides sit in `.landing-blueprint-scope` wrapping `<main>` + footer so lines can reach the
+ * footer blueprint crosses. `bottom` ≈ footer block height so strokes end just above the crosses.
+ */
+.landing-blueprint-scope .blueprint-guide {
+  bottom: clamp(7rem, calc(6.5rem + 5vh), 9.25rem);
+}
+
 .section-blob {
   position: absolute;
   left: var(--x);
@@ -2021,6 +2029,11 @@ h6 {
   .blueprint-guide {
     top: 18px;
     bottom: 36px;
+  }
+
+  .landing-blueprint-scope .blueprint-guide {
+    top: 18px;
+    bottom: clamp(6.5rem, calc(5.75rem + 7vh), 8.75rem);
   }
 
   .section-blob {

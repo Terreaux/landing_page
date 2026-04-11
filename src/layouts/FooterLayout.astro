@@ -3,15 +3,17 @@
  * Composition shell for the site footer region. Defaults to `SiteFooter`; pass
  * children to replace it with a different footer implementation.
  */
-import { SiteFooter } from '@/islands/SiteFooter';
+import { SiteFooter, type SiteMainVariant } from '@/islands/SiteFooter';
 
 interface Props {
   rootPath?: string;
+  /** Match `<main>` width in `SiteLayout` so the footer lines up with blueprint content. */
+  mainVariant?: SiteMainVariant;
 }
 
-const { rootPath = '/' } = Astro.props;
+const { rootPath = '/', mainVariant = 'content' } = Astro.props;
 ---
 
 <slot>
-  <SiteFooter rootPath={rootPath} />
+  <SiteFooter rootPath={rootPath} mainVariant={mainVariant} />
 </slot>

@@ -15,7 +15,7 @@ const copy = getContactCopy(variant);
 const scheduleHref = `${rootPath}schedule/`;
 
 const cardGridClass =
-  'relative z-10 reveal grid gap-8 p-[clamp(1.2rem,3vw,2.2rem)] md:grid-cols-[1.05fr_1fr] md:gap-10';
+  'relative z-10 grid gap-8 p-[clamp(1.2rem,3vw,2.2rem)] md:grid-cols-[1.05fr_1fr] md:gap-10';
 
 const titleClass =
   variant === 'page'
@@ -31,7 +31,11 @@ const blobStyle =
 
 {
   variant === 'landing' ? (
-    <section id="contact" class="relative scroll-mt-28 pt-24 pb-28 md:pt-32 md:pb-36">
+    <section
+      id="contact"
+      class="relative scroll-mt-28 pt-24 pb-28 md:pt-32 md:pb-36 reveal"
+      data-reveal
+    >
       <span class="section-blob" style={blobStyle} aria-hidden="true" />
       <BlueprintCard class:list={[cardGridClass]}>
         <div class="flex flex-col gap-4">
@@ -46,13 +50,10 @@ const blobStyle =
           <ContactForm client:visible />
         </div>
       </BlueprintCard>
-      <div class="last-section-tail" aria-hidden="true">
-        <span class="last-section-cross last-section-cross-left" />
-        <span class="last-section-cross last-section-cross-right" />
-      </div>
     </section>
   ) : (
-    <BlueprintCard class:list={[cardGridClass]}>
+    <div class="reveal" data-reveal>
+      <BlueprintCard class:list={[cardGridClass]}>
       <div class="flex flex-col gap-4">
         <p class="eyebrow">{copy.eyebrow}</p>
         <h1 class={titleClass}>{copy.headline}</h1>
@@ -65,5 +66,6 @@ const blobStyle =
         <ContactForm client:visible />
       </div>
     </BlueprintCard>
+    </div>
   )
 }

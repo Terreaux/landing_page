@@ -32,8 +32,23 @@ export function SiteFooter({ rootPath = '/', mainVariant = 'content' }: SiteFoot
   const linkClass =
     'text-[#b6bfab] transition-colors hover:text-[#f7f9f2] text-[0.79rem] uppercase tracking-[0.1em]';
 
+  const footerChrome =
+    mainVariant === 'landing' ? (
+      <div className="last-section-tail last-section-tail--footer" aria-hidden>
+        <span className="last-section-cross last-section-cross-left" />
+        <span className="last-section-cross last-section-cross-right" />
+      </div>
+    ) : null;
+
   return (
-    <footer className="border-t border-[#d1e4b033]/40 bg-black/30">
+    <footer
+      className={
+        mainVariant === 'landing'
+          ? 'relative z-[8] bg-black/30'
+          : 'border-t border-[#d1e4b033]/40 bg-black/30'
+      }
+    >
+      {footerChrome}
       <div className={FOOTER_INNER_BY_VARIANT[mainVariant]}>
         <p className="text-[0.79rem] text-[#b6bfab]">
           © {year} Terreaux. All rights reserved.

@@ -1,24 +1,92 @@
 ---
-import { SiteHeader } from '@/islands/SiteHeader';
 import BaseLayout from '@/layouts/BaseLayout.astro';
+import FooterLayout from '@/layouts/FooterLayout.astro';
+import HeaderLayout from '@/layouts/HeaderLayout.astro';
 import { getRootPath } from '@/lib/utils';
+
+type MainVariant =
+  'content' | 'landing' | 'playgroundAgentic' | 'playgroundCv' | 'fluid';
 
 interface Props {
   title?: string;
   description?: string;
   activePage?: 'services' | 'approach' | 'contact' | 'schedule';
+  /** Width/typography preset for `<main>`. Ignored if `mainClass` is set. */
+  mainVariant?: MainVariant;
+  /** When set, replaces variant classes entirely. */
+  mainClass?: string;
 }
 
-const { title, description, activePage } = Astro.props;
+/**
+ * Optional slots:
+ * - `header` — replaces the default `SiteHeader` inside `HeaderLayout`.
+ * - `footer` — replaces the default `SiteFooter` inside `FooterLayout`.
+ */
+
+const MAIN_BY_VARIANT: Record<MainVariant, string> = {
+  content:
+    'mx-auto w-[min(980px,calc(100vw-2*var(--blueprint-content-inset)))] py-16 md:py-24',
+  landing:
+    'relative mx-auto w-[min(1200px,calc(100vw-2*var(--blueprint-content-inset)))] pb-0 font-monoSans text-[#f7f9f2]',
+  playgroundAgentic:
+    'mx-auto w-[min(1700px,96vw)] pb-24 pt-12 text-[#f7f9f2] md:pb-32 md:pt-16',
+  playgroundCv:
+    'mx-auto flex w-[min(1280px,94vw)] justify-center pb-24 pt-12 text-[#f7f9f2] md:pb-32 md:pt-16',
+  fluid: ''
+};
+
+const { title, description, activePage, mainVariant = 'content', mainClass } = Astro.props;
 const rootPath = getRootPath();
+const resolvedMainClass = mainClass ?? MAIN_BY_VARIANT[mainVariant];
+
+/** Forwarding `<slot slot="default" />` into Header/FooterLayout overrides fallback even when empty; only forward when a named slot is actually passed. */
+const hasHeaderSlot = Astro.slots.has('header');
+const hasFooterSlot = Astro.slots.has('footer');
 ---
 
 <BaseLayout title={title} description={description}>
   <div class="site-bg" aria-hidden="true" />
 
-  <SiteHeader client:load rootPath={rootPath} activePage={activePage} />
+  {
+    hasHeaderSlot ? (
+      <HeaderLayout rootPath={rootPath} activePage={activePage}>
+        <slot name="header" slot="default" />
+      </HeaderLayout>
+    ) : (
+      <HeaderLayout rootPath={rootPath} activePage={activePage} />
+    )
+  }
 
-  <main class="mx-auto w-[min(980px,92vw)] py-16 md:py-24">
-    <slot />
-  </main>
+  <div
+    class:list={[
+      'relative',
+      mainVariant === 'landing' && 'landing-blueprint-scope'
+    ]}
+  >
+    {
+      mainVariant === 'landing' && (
+        <div class="page-blueprint-guides" aria-hidden="true">
+          <span class="blueprint-guide blueprint-guide-left" />
+          <span class="blueprint-guide blueprint-guide-right" />
+        </div>
+      )
+    }
+    <main
+      class:list={[
+        resolvedMainClass || undefined,
+        mainVariant === 'landing' && 'relative z-[5]'
+      ]}
+    >
+      <slot />
+    </main>
+    {
+      hasFooterSlot ? (
+        <FooterLayout rootPath={rootPath} mainVariant={mainVariant}>
+          <slot name="footer" slot="default" />
+        </FooterLayout>
+      ) : (
+        <FooterLayout rootPath={rootPath} mainVariant={mainVariant} />
+      )
+    }
+  </div>
 </BaseLayout>

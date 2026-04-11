@@ -8,17 +8,5 @@ import SiteLayout from '@/layouts/SiteLayout.astro';
   description="Contact Terreaux to discuss applied AI systems, agentic systems, computer vision, and AI platform ops engagements."
   activePage="contact"
 >
-  <BlueprintCard>
-    <p class="eyebrow">Contact</p>
-    <h1 class="max-w-[18ch] font-display text-[clamp(2rem,5vw,4.2rem)] leading-[1.04] text-[#f7f9f2]">
-      Tell us what you need to build.
-    </h1>
-    <p class="mt-4 max-w-[62ch] text-[#d0d9c3]">
-      Share your objective, current constraints, and timeline. We will follow up with a practical delivery plan.
-    </p>
-
-    <div class="mt-8 max-w-[720px]">
-      <ContactForm client:load />
-    </div>
-  </BlueprintCard>
+  <ContactBlock variant="page" />
 </SiteLayout>

@@ -1,0 +1,35 @@
+---
+import { getCollection } from 'astro:content';
+import SiteLayout from '@/layouts/SiteLayout.astro';
+import { getRootPath } from '@/lib/utils';
+
+const rootPath = getRootPath();
+const cases = await getCollection('useCases');
+---
+
+<SiteLayout
+  title="Use cases | Terreaux"
+  description="How we apply agentic systems, computer vision, and AI platform operations in practice."
+>
+  <p class="eyebrow">Use cases</p>
+  <h1 class="max-w-[20ch] font-display text-[clamp(2rem,5vw,4.2rem)] leading-[1.04] text-[#f7f9f2]">
+    Field notes
+  </h1>
+  <p class="mt-4 max-w-[62ch] text-[#d0d9c3]">
+    Short writeups of patterns we use with clients—architecture, constraints, and outcomes.
+  </p>
+
+  <ul class="mt-12 space-y-6">
+    {cases.map((c) => (
+      <li>
+        <a
+          href={`${rootPath}use-cases/${c.slug}/`}
+          class="font-display text-lg text-[#98f2be] underline-offset-4 transition-colors hover:text-[#c3e8b1]"
+        >
+          {c.data.title}
+        </a>
+        <p class="mt-1 max-w-[62ch] text-sm text-[#b6bfab]">{c.data.description}</p>
+      </li>
+    ))}
+  </ul>
+</SiteLayout>

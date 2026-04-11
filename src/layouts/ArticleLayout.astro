@@ -1,0 +1,63 @@
+---
+import BlueprintCard from '@/components/BlueprintCard.astro';
+import SiteLayout from '@/layouts/SiteLayout.astro';
+
+interface Props {
+  /** Visible page heading (H1). */
+  title: string;
+  /** Full document title; defaults to `${title} | Terreaux`. */
+  pageTitle?: string;
+  description?: string;
+  /** Small label above the title, e.g. "Use case". */
+  eyebrow?: string;
+  /** Free line under the title (e.g. "Last updated: …"). */
+  subheading?: string;
+  publishedAt?: string;
+  author?: string;
+  readingTime?: string;
+  activePage?: 'services' | 'approach' | 'contact' | 'schedule';
+}
+
+const {
+  title,
+  pageTitle: pageTitleProp,
+  description,
+  eyebrow,
+  subheading,
+  publishedAt,
+  author,
+  readingTime,
+  activePage
+} = Astro.props;
+
+const pageTitle = pageTitleProp ?? `${title} | Terreaux`;
+
+const metaLine = [publishedAt, author, readingTime].filter(Boolean).join(' · ');
+---
+
+<SiteLayout title={pageTitle} description={description} activePage={activePage}>
+  <BlueprintCard>
+    {eyebrow && <p class="eyebrow">{eyebrow}</p>}
+    <h1 class="max-w-[24ch] font-display text-[clamp(2rem,5vw,4.2rem)] leading-[1.04] text-[#f7f9f2]">
+      {title}
+    </h1>
+    {
+      subheading && (
+        <p class="mt-4 max-w-[62ch] text-[#d0d9c3]">
+          {subheading}
+        </p>
+      )
+    }
+    {
+      metaLine && (
+        <p class="mt-4 max-w-[62ch] text-sm text-[#b6bfab]">
+          {metaLine}
+        </p>
+      )
+    }
+    <div class="prose-legal article-markdown mt-10 max-w-[62ch] space-y-8 text-[#d0d9c3]">
+      <slot />
+    </div>
+    <slot name="footer" />
+  </BlueprintCard>
+</SiteLayout>
